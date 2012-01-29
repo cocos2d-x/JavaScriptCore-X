@@ -1,0 +1,16 @@
+- About
+These sources are cloned from http://android.googlesource.com/ master branch at Jan 29 2012.
+Please be ware that JavaScriptCore is open source under LGPL license!
+
+- How to build
+cd /your_path/android-ndk-r6
+./ndk_build -C /your_path2/JavaScriptCore-X/jsc-android/
+
+- Authors
+JianHua Chen
+Walzer Wang
+
+- Todo
+(1) Change the application's name from HelloJNI to HelloJSC
+(2) Add other JSC test cases
+(3) I'm not sure if we can leave the generated .lut.h files in runtime folder instead of generating them before compilation.
