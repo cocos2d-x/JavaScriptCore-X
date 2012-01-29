@@ -14,3 +14,5 @@ Walzer Wang
 (1) Change the application's name from HelloJNI to HelloJSC
 (2) Add other JSC test cases
 (3) I'm not sure if we can leave the generated .lut.h files in runtime folder instead of generating them before compilation.
+(2) I hacked jsc-android/jni/Source/JavaScriptCore/ctuils/Android.mk line 68 ~ line 82. If we build it on windows cygwin, only uio.c is involved. But on mac, WINDOWS_HOST_ONLY equal to 0 and mspace.c is involved, which leads to an error about bionic dependency. I hacked here to avoid mspace.c. Any how, libjs.so seems working well currently.
+(3) gcc would raise an error if jsc-android/jni/Application.mk hasn't defined APP_OPTIM := release. I found the solution from here http://groups.google.com/group/android-ndk/browse_thread/thread/4dc0addd20cf23d0?tvc=2
