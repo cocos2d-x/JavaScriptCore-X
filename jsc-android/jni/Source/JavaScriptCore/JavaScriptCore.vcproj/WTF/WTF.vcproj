@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="WTF"
 	ProjectGUID="{AA8A5A85-592B-4357-BC60-E0E91E026AF6}"
 	RootNamespace="WTF"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -142,6 +143,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				WarnAsError="false"
+				DisableSpecificWarnings="4396"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -609,19 +612,19 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\wtf\DynamicAnnotations.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\wtf\DynamicAnnotations.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\wtf\dtoa.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\wtf\dtoa.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\wtf\DynamicAnnotations.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\wtf\DynamicAnnotations.h"
 			>
 		</File>
 		<File

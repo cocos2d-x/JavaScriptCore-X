@@ -59,11 +59,15 @@
 #define JS_EXPORTCLASS
 #endif
 
-//cjh #define WTF_EXPORT_PRIVATE
-//cjh #define JS_EXPORT_PRIVATE
+
+
+#if OS(UNIX)
 #define WTF_EXPORT_PRIVATE __attribute__((visibility("default"))) //cjh add
 #define JS_EXPORT_PRIVATE __attribute__((visibility("default"))) //cjh add
-
+#else
+#define WTF_EXPORT_PRIVATE
+#define JS_EXPORT_PRIVATE
+#endif
 
 #endif /* USE(EXPORT_MACROS) */
 

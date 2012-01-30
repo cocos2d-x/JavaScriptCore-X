@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="JavaScriptCore"
 	ProjectGUID="{011D10F1-B656-4A1B-A0C3-3842F02122C5}"
 	RootNamespace="JavaScriptCore"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -50,6 +51,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -68,9 +71,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -111,6 +111,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -129,9 +131,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -173,6 +172,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -191,9 +192,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -234,6 +232,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -252,9 +252,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -295,6 +292,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -313,9 +312,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -344,6 +340,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				WarnAsError="false"
+				DisableSpecificWarnings="4396"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -356,6 +354,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -374,9 +374,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -418,6 +415,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -436,9 +435,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -480,6 +476,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -498,9 +496,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -1873,94 +1868,94 @@
 		<Filter
 			Name="heap"
 			>
-                            <File
-                                    RelativePath="..\..\heap\ConservativeRoots.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\ConservativeRoots.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MachineStackMarker.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MachineStackMarker.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkedBlock.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkedBlock.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkedSpace.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkedSpace.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkStack.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkStack.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\MarkStackWin.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Heap.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Heap.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Strong.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Handle.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\HandleHeap.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\HandleHeap.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\HandleStack.cpp"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\HandleStack.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Local.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\LocalScope.h"
-                                    >
-                            </File>
-                            <File
-                                    RelativePath="..\..\heap\Weak.h"
-                                    >
-                            </File>
+			<File
+				RelativePath="..\..\heap\ConservativeRoots.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\ConservativeRoots.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Handle.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\HandleHeap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\HandleHeap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\HandleStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\HandleStack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Heap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Heap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Local.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\LocalScope.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MachineStackMarker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MachineStackMarker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkedBlock.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkedBlock.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkedSpace.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkedSpace.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkStack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\MarkStackWin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Strong.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\heap\Weak.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\config.h"

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="JavaScriptCoreGenerated"
 	ProjectGUID="{4FF5BA11-59EC-4C24-8F52-F235C2E7D43A}"
 	RootNamespace="JavaScriptCoreGenerated"
 	Keyword="MakeFileProj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -22,6 +23,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -31,6 +42,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -40,6 +61,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -49,6 +80,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -58,6 +99,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -67,6 +118,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
@@ -76,6 +137,16 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
+				BuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make"
+				ReBuildCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean&#x0D;&#x0A;nmake -f JavaScriptCoreGenerated.make"
+				CleanCommandLine="%SystemDrive%\cygwin\bin\which.exe bash&#x0D;&#x0A;if errorlevel 1 set PATH=%SystemDrive%\cygwin\bin;%PATH%&#x0D;&#x0A;cmd /c&#x0D;&#x0A;&#x0D;&#x0A;set CONFIGURATIONBUILDDIR=$(WebKitOutputDir)\$(ConfigurationName)&#x0D;&#x0A;set PRODUCTION=$(PRODUCTION)&#x0D;&#x0A;nmake /nologo -f JavaScriptCoreGenerated.make clean"
+				Output=""
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 	</Configurations>
