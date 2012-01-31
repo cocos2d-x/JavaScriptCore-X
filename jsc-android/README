@@ -19,7 +19,9 @@ value: F:\Project\JavaScriptCore-X\jsc-android\jni\WebKitBuild   (Please replace
 name: SystemDrive
 value: E:   (Please replace 'E:' to the root path of cygwin)
 
-Open 'JavaScriptCore-X\jsc-android\jni\Source\JavaScriptCore\JavaScriptCore.vcproj\JavaScriptCore.sln' by VS2008 and build all projects.
+2. Logout or reboot your computer, you can not start vs2008 if you don't do this.
+
+3. Open 'JavaScriptCore-X\jsc-android\jni\Source\JavaScriptCore\JavaScriptCore.vcproj\JavaScriptCore.sln' by VS2008 and build all projects.
 
 
 
