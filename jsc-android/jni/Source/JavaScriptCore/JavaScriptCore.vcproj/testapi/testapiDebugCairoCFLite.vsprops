@@ -7,7 +7,6 @@
       $(WebKitVSPropsRedirectionDir)..\..\..\..\WebKitLibraries\win\tools\vsprops\common.vsprops;
       $(WebKitVSPropsRedirectionDir)..\..\..\..\WebKitLibraries\win\tools\vsprops\debug.vsprops;
       $(WebKitVSPropsRedirectionDir)..\..\..\..\WebKitLibraries\win\tools\vsprops\debug_wincairo.vsprops;
-      .\testapiCommon.vsprops;
-      ..\JavaScriptCore\JavaScriptCoreCFLite.vsprops"
+      .\testapiCommon.vsprops"
 	>
 </VisualStudioPropertySheet>

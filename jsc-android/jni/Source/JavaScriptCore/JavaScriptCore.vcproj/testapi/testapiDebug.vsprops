@@ -6,7 +6,6 @@
 	InheritedPropertySheets="
       $(WebKitVSPropsRedirectionDir)..\..\..\..\WebKitLibraries\win\tools\vsprops\common.vsprops;
       $(WebKitVSPropsRedirectionDir)..\..\..\..\WebKitLibraries\win\tools\vsprops\debug.vsprops;
-      .\testapiCommon.vsprops;
-      ..\JavaScriptCore\JavaScriptCoreCF.vsprops"
+      .\jscCommon.vsprops"
 	>
 </VisualStudioPropertySheet>

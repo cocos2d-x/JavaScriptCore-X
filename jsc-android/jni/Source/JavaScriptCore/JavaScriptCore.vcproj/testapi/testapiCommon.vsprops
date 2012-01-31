@@ -6,15 +6,14 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\..\API&quot;;&quot;$(ConfigurationBuildDir)\include\WebCore\ForwardingHeaders&quot;;&quot;$(ConfigurationBuildDir)\include\JavaScriptCore&quot;;&quot;$(ConfigurationBuildDir)\include\private\JavaScriptCore&quot;;&quot;$(ConfigurationBuildDir)\include&quot;;&quot;$(ConfigurationBuildDir)\include\private&quot;;&quot;$(WebKitLibrariesDir)\include&quot;;&quot;$(WebKitLibrariesDir)\include\private&quot;"
-		PreprocessorDefinitions="NOMINMAX"
-		WarningLevel="4"
-		Detect64BitPortabilityProblems="true"
+		AdditionalIncludeDirectories="&quot;$(ConfigurationBuildDir)\include&quot;;&quot;$(ConfigurationBuildDir)\include\private&quot;;&quot;$(ConfigurationBuildDir)\obj\JavaScriptCore\DerivedSources\&quot;;../../;&quot;../../os-win32/&quot;;../../assembler/;../../API/;../../parser/;../../heap/;../../runtime/;../../VM/;../../bytecode/;../../interpreter/;../../wtf/;../../debugger/;../../bytecompiler/;../../profiler;../../jit/;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitLibrariesDir)\include&quot;"
+		PreprocessorDefinitions="__STD_C"
 		ForcedIncludeFiles="ICUVersion.h"
+		ForcedUsingFiles=""
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="JavaScriptCore$(WebKitDLLConfigSuffix).lib WTF$(WebKitConfigSuffix).lib pthreadVC2$(LibraryConfigSuffix).lib libicuin$(LibraryConfigSuffix).lib libicuuc$(LibraryConfigSuffix).lib"
+		AdditionalDependencies="JavaScriptCore$(WebKitDLLConfigSuffix).lib libicuin$(LibraryConfigSuffix).lib libicuuc$(LibraryConfigSuffix).lib winmm.lib pthreadVC2$(LibraryConfigSuffix).lib user32.lib"
 		AdditionalLibraryDirectories="&quot;$(IntDir)\lib&quot;"
 		SubSystem="1"
 	/>

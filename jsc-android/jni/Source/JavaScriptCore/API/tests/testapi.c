@@ -37,13 +37,14 @@
 #endif
 
 #if COMPILER(MSVC)
-
-#include <wtf/MathExtras.h>
+#include <limits>
+//#include <wtf/MathExtras.h>
 
 static double nan(const char*)
 {
     return std::numeric_limits<double>::quiet_NaN();
 }
+static bool isnan(double num) { return !!_isnan(num); }
 
 #endif
 
