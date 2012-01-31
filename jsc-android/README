@@ -29,6 +29,10 @@ value: E:   (Please replace 'E:' to the root path of cygwin)
 JianHua Chen
 Walzer Wang
 
+markshiz (https://github.com/markshiz/corefoundation-lite-android)
+  author of android port of corefoundation
+
+
 - Todo
 (1) Change the application's name from HelloJNI to HelloJSC
 (2) Add other JSC test cases
