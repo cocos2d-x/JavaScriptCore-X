@@ -176,22 +176,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\API\tests\JSNode.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\JSNodeList.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\Node.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\NodeList.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\API\tests\testapi.c"
 				>
 				<FileConfiguration
@@ -209,22 +193,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\..\API\tests\JSNode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\JSNodeList.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\Node.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\API\tests\NodeList.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

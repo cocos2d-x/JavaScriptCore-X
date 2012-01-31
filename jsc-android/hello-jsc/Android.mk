@@ -19,12 +19,13 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := hello-jni
 
 
-LOCAL_CFLAGS += -DENABLE_SINGLE_THREADED=1 -DUSE_FILE32API
+LOCAL_CFLAGS += -DENABLE_SINGLE_THREADED=1 -DUSE_FILE32API -D__LINUX__=1 -DCOMPATIBLE_GCC4=1 -D__LITTLE_ENDIAN__=1
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../jni/Source/JavaScriptCore/include \
                     $(LOCAL_PATH)/../jni/Source/JavaScriptCore/include/JavaScriptCore \
                     $(LOCAL_PATH)/../jni/Source/JavaScriptCore \
-                    $(LOCAL_PATH)/../jni/Source/JavaScriptCore/wtf 
+                    $(LOCAL_PATH)/../jni/Source/JavaScriptCore/wtf \
+                    $(LOCAL_PATH)/../corefoundation-lite-android 
 
 LOCAL_SRC_FILES := hello-jni.cpp \
                    JSNode.c \
@@ -33,10 +34,12 @@ LOCAL_SRC_FILES := hello-jni.cpp \
                    NodeList.c \
                    unzip.cpp \
                    minidom.cpp \
-                   ioapi.cpp 
+                   ioapi.cpp \
+                   testapi.cpp \
+                   utils.cpp 
 
-LOCAL_LDLIBS := -lz -llog
+LOCAL_LDLIBS :=  -lz -llog
 
-LOCAL_SHARED_LIBRARIES := libjs
+LOCAL_SHARED_LIBRARIES := libjs libcorefoundation
 
 include $(BUILD_SHARED_LIBRARY)

@@ -24,16 +24,10 @@
  *   apps/samples/hello-jni/project/src/com/example/HelloJni/HelloJni.java
  */
  
-extern "C" int jsc_main();
+#include "utils.h"
 
-#if 1
-#define  LOG_TAG    "MessageJni"
-#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
-#else
-#define  LOGD(...) 
-#endif
-
-void setResourcePath(const char* pszResourcePath);
+int minidom_main();
+int testapi_main();
 
 extern "C"
 {
@@ -46,14 +40,21 @@ jstring
 Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
                                                   jobject thiz )
 {
-LOGD("stringFromJNI");
-    jsc_main();
-    return env->NewStringUTF("Hello from JNI !");
+    LOGD("-------------------------------------------------------");
+    LOGD("-------------------minidom_begin-------------------------");
+    minidom_main();
+    LOGD("-------------------minidom_end-------------------------");
+    LOGD("-------------------------------------------------------");
+    LOGD("-------------------testapi_begin-------------------------");
+    testapi_main();
+    LOGD("-------------------testapi_end-------------------------");
+    LOGD("-------------------------------------------------------");
+    return env->NewStringUTF("Hello JavaScriptCore !");
 }
 
 void Java_com_example_hellojni_HelloJni_nativeSetPaths(JNIEnv*  env, jobject thiz, jstring apkPath)
 {
-LOGD("nativeSetPaths1");
+    LOGD("nativeSetPaths1");
     const char* str;
     jboolean isCopy;
     str = env->GetStringUTFChars(apkPath, &isCopy);

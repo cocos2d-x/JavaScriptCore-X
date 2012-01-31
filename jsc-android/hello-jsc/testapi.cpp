@@ -32,14 +32,16 @@
 #define ASSERT_DISABLED 0
 #include <wtf/Assertions.h>
 #include <wtf/UnusedParam.h>
+#include "utils.h"
+
 
 #if OS(WINDOWS)
 #include <windows.h>
 #endif
 
-#if COMPILER(MSVC)
-
-#include <wtf/MathExtras.h>
+#if 1//COMPILER(MSVC)
+#include <limits>
+//#include <wtf/MathExtras.h>
 
 static double nan(const char*)
 {
@@ -53,7 +55,7 @@ static int failed;
 static void assertEqualsAsBoolean(JSValueRef value, bool expectedValue)
 {
     if (JSValueToBoolean(context, value) != expectedValue) {
-        fprintf(stderr, "assertEqualsAsBoolean failed: %p, %d\n", value, expectedValue);
+        LOGD("assertEqualsAsBoolean failed: %p, %d\n", value, expectedValue);
         failed = 1;
     }
 }
@@ -66,7 +68,7 @@ static void assertEqualsAsNumber(JSValueRef value, double expectedValue)
     // causing a build break with -Wshorten-64-to-32 enabled.  The issue is known by the appropriate team.
     // After that's resolved, we can remove these casts
     if (number != expectedValue && !(isnan((float)number) && isnan((float)expectedValue))) {
-        fprintf(stderr, "assertEqualsAsNumber failed: %p, %lf\n", value, expectedValue);
+        LOGD("assertEqualsAsNumber failed: %p, %lf\n", value, expectedValue);
         failed = 1;
     }
 }
@@ -82,13 +84,13 @@ static void assertEqualsAsUTF8String(JSValueRef value, const char* expectedValue
     unsigned i;
     for (i = 0; jsBuffer[i]; i++) {
         if (jsBuffer[i] != expectedValue[i]) {
-            fprintf(stderr, "assertEqualsAsUTF8String failed at character %d: %c(%d) != %c(%d)\n", i, jsBuffer[i], jsBuffer[i], expectedValue[i], expectedValue[i]);
+            LOGD("assertEqualsAsUTF8String failed at character %d: %c(%d) != %c(%d)\n", i, jsBuffer[i], jsBuffer[i], expectedValue[i], expectedValue[i]);
             failed = 1;
         }
     }
 
     if (jsSize < strlen(jsBuffer) + 1) {
-        fprintf(stderr, "assertEqualsAsUTF8String failed: jsSize was too small\n");
+        LOGD("assertEqualsAsUTF8String failed: jsSize was too small\n");
         failed = 1;
     }
 
@@ -112,12 +114,12 @@ static void assertEqualsAsCharactersPtr(JSValueRef value, const char* expectedVa
     CFRelease(expectedValueAsCFString);
 
     if (memcmp(jsBuffer, cfBuffer, cfLength * sizeof(UniChar)) != 0) {
-        fprintf(stderr, "assertEqualsAsCharactersPtr failed: jsBuffer != cfBuffer\n");
+        LOGD("assertEqualsAsCharactersPtr failed: jsBuffer != cfBuffer\n");
         failed = 1;
     }
     
     if (jsLength != (size_t)cfLength) {
-        fprintf(stderr, "assertEqualsAsCharactersPtr failed: jsLength(%ld) != cfLength(%ld)\n", jsLength, cfLength);
+        LOGD("assertEqualsAsCharactersPtr failed: jsLength(%ld) != cfLength(%ld)\n", jsLength, cfLength);
         failed = 1;
     }
 
@@ -653,7 +655,7 @@ static JSValueRef print_callAsFunction(JSContextRef ctx, JSObjectRef functionObj
         size_t sizeUTF8 = JSStringGetMaximumUTF8CStringSize(string);
         char* stringUTF8 = (char*)malloc(sizeUTF8);
         JSStringGetUTF8CString(string, stringUTF8, sizeUTF8);
-        printf("%s\n", stringUTF8);
+        LOGD("%s\n", stringUTF8);
         free(stringUTF8);
         JSStringRelease(string);
     }
@@ -773,9 +775,9 @@ static bool assertTrue(bool value, const char* message)
 {
     if (!value) {
         if (message)
-            fprintf(stderr, "assertTrue failed: '%s'\n", message);
+            LOGD("assertTrue failed: '%s'\n", message);
         else
-            fprintf(stderr, "assertTrue failed.\n");
+            LOGD("assertTrue failed.\n");
         failed = 1;
     }
     return value;
@@ -822,100 +824,7 @@ static bool checkForCycleInPrototypeChain()
     return result;
 }
 
-static unsigned char* getFileDataFromZip(const char* pszZipFilePath, const char* pszFileName, unsigned long * pSize)
-{
-    unsigned char * pBuffer = NULL;
-    unzFile pFile = NULL;
-    *pSize = 0;
-
-    do 
-    {
-        LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(!pszZipFilePath || !pszFileName);LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(strlen(pszZipFilePath) == 0);LOGD("getFileDataFromZip line=%d", __LINE__);
-
-        pFile = unzOpen(pszZipFilePath);LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(!pFile);LOGD("getFileDataFromZip line=%d", __LINE__);
-
-        int nRet = unzLocateFile(pFile, pszFileName, 1);LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(UNZ_OK != nRet);LOGD("getFileDataFromZip line=%d", __LINE__);
-
-        char szFilePathA[260];
-        unz_file_info FileInfo;
-        nRet = unzGetCurrentFileInfo(pFile, &FileInfo, szFilePathA, sizeof(szFilePathA), NULL, 0, NULL, 0);LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(UNZ_OK != nRet);
-
-        nRet = unzOpenCurrentFile(pFile);LOGD("getFileDataFromZip line=%d", __LINE__);
-        CC_BREAK_IF(UNZ_OK != nRet);LOGD("getFileDataFromZip line=%d", __LINE__);
-
-        pBuffer = new unsigned char[FileInfo.uncompressed_size];LOGD("getFileDataFromZip line=%d", __LINE__);
-        int nSize = 0;
-        nSize = unzReadCurrentFile(pFile, pBuffer, FileInfo.uncompressed_size);
-        CCAssert(nSize == 0 || nSize == (int)FileInfo.uncompressed_size, "the file size is wrong");
-
-        *pSize = FileInfo.uncompressed_size;
-        unzCloseCurrentFile(pFile);LOGD("getFileDataFromZip line=%d", __LINE__);
-    } while (0);
-LOGD("getFileDataFromZip line=%d", __LINE__);
-    if (pFile)
-    {
-        unzClose(pFile);LOGD("getFileDataFromZip line=%d", __LINE__);
-    }
-
-    return pBuffer;LOGD("getFileDataFromZip line=%d", __LINE__);
-}
-
-static unsigned char* getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize)
-{	
-    unsigned char * pData = 0;
-    string fullPath(pszFileName);
-
-    if ((! pszFileName) || (! pszMode))
-    {
-        return 0;
-    }
-
-    if (pszFileName[0] != '/')
-    {
-        // read from apk
-        fullPath.insert(0, "assets/");
-        pData =  getFileDataFromZip(s_strResourcePath.c_str(), fullPath.c_str(), pSize);
-    }
-    else
-    {
-        do 
-        {
-            // read rrom other path than user set it
-            FILE *fp = fopen(pszFileName, pszMode);
-            CC_BREAK_IF(!fp);
-
-            unsigned long size;
-            fseek(fp,0,SEEK_END);
-            size = ftell(fp);
-            fseek(fp,0,SEEK_SET);
-            pData = new unsigned char[size];
-            size = fread(pData,sizeof(unsigned char), size,fp);
-            fclose(fp);
-
-            if (pSize)
-            {
-                *pSize = size;
-            }			
-        } while (0);		
-    }
-
-//     if (! pData && getIsPopupNotify())
-//     {
-//         std::string title = "Notification";
-//         std::string msg = "Get data from file(";
-//         msg.append(fullPath.c_str()).append(") failed!");
-//         CCMessageBox(msg.c_str(), title.c_str());
-//     }
-
-    return pData;
-}
-
-extern "C" int jsc_main()
+int testapi_main()
 {
 #if OS(WINDOWS)
     // Cygwin calls ::SetErrorMode(SEM_FAILCRITICALERRORS), which we will inherit. This is bad for
@@ -1037,32 +946,32 @@ extern "C" int jsc_main()
     JSObjectSetProperty(context, aHeapRef, lengthStr, JSValueMakeNumber(context, 10), 0, 0);
     JSStringRef privatePropertyName = JSStringCreateWithUTF8CString("privateProperty");
     if (!JSObjectSetPrivateProperty(context, myObject, privatePropertyName, aHeapRef)) {
-        printf("FAIL: Could not set private property.\n");
+        LOGD("FAIL: Could not set private property.\n");
         failed = 1;
     } else
-        printf("PASS: Set private property.\n");
+        LOGD("PASS: Set private property.\n");
     aStackRef = 0;
     if (JSObjectSetPrivateProperty(context, aHeapRef, privatePropertyName, aHeapRef)) {
-        printf("FAIL: JSObjectSetPrivateProperty should fail on non-API objects.\n");
+        LOGD("FAIL: JSObjectSetPrivateProperty should fail on non-API objects.\n");
         failed = 1;
     } else
-        printf("PASS: Did not allow JSObjectSetPrivateProperty on a non-API object.\n");
+        LOGD("PASS: Did not allow JSObjectSetPrivateProperty on a non-API object.\n");
     if (JSObjectGetPrivateProperty(context, myObject, privatePropertyName) != aHeapRef) {
-        printf("FAIL: Could not retrieve private property.\n");
+        LOGD("FAIL: Could not retrieve private property.\n");
         failed = 1;
     } else
-        printf("PASS: Retrieved private property.\n");
+        LOGD("PASS: Retrieved private property.\n");
     if (JSObjectGetPrivateProperty(context, aHeapRef, privatePropertyName)) {
-        printf("FAIL: JSObjectGetPrivateProperty should return NULL when called on a non-API object.\n");
+        LOGD("FAIL: JSObjectGetPrivateProperty should return NULL when called on a non-API object.\n");
         failed = 1;
     } else
-        printf("PASS: JSObjectGetPrivateProperty return NULL.\n");
+        LOGD("PASS: JSObjectGetPrivateProperty return NULL.\n");
 
     if (JSObjectGetProperty(context, myObject, privatePropertyName, 0) == aHeapRef) {
-        printf("FAIL: Accessed private property through ordinary property lookup.\n");
+        LOGD("FAIL: Accessed private property through ordinary property lookup.\n");
         failed = 1;
     } else
-        printf("PASS: Cannot access private property through ordinary property lookup.\n");
+        LOGD("PASS: Cannot access private property through ordinary property lookup.\n");
 
     JSGarbageCollect(context);
 
@@ -1071,79 +980,79 @@ extern "C" int jsc_main()
 
     aHeapRef = JSValueToObject(context, JSObjectGetPrivateProperty(context, myObject, privatePropertyName), 0);
     if (JSValueToNumber(context, JSObjectGetProperty(context, aHeapRef, lengthStr, 0), 0) != 10) {
-        printf("FAIL: Private property has been collected.\n");
+        LOGD("FAIL: Private property has been collected.\n");
         failed = 1;
     } else
-        printf("PASS: Private property does not appear to have been collected.\n");
+        LOGD("PASS: Private property does not appear to have been collected.\n");
     JSStringRelease(lengthStr);
 
     if (!JSObjectSetPrivateProperty(context, myObject, privatePropertyName, 0)) {
-        printf("FAIL: Could not set private property to NULL.\n");
+        LOGD("FAIL: Could not set private property to NULL.\n");
         failed = 1;
     } else
-        printf("PASS: Set private property to NULL.\n");
+        LOGD("PASS: Set private property to NULL.\n");
     if (JSObjectGetPrivateProperty(context, myObject, privatePropertyName)) {
-        printf("FAIL: Could not retrieve private property.\n");
+        LOGD("FAIL: Could not retrieve private property.\n");
         failed = 1;
     } else
-        printf("PASS: Retrieved private property.\n");
+        LOGD("PASS: Retrieved private property.\n");
 
     JSStringRef validJSON = JSStringCreateWithUTF8CString("{\"aProperty\":true}");
     JSValueRef jsonObject = JSValueMakeFromJSONString(context, validJSON);
     JSStringRelease(validJSON);
     if (!JSValueIsObject(context, jsonObject)) {
-        printf("FAIL: Did not parse valid JSON correctly\n");
+        LOGD("FAIL: Did not parse valid JSON correctly\n");
         failed = 1;
     } else
-        printf("PASS: Parsed valid JSON string.\n");
+        LOGD("PASS: Parsed valid JSON string.\n");
     JSStringRef propertyName = JSStringCreateWithUTF8CString("aProperty");
     assertEqualsAsBoolean(JSObjectGetProperty(context, JSValueToObject(context, jsonObject, 0), propertyName, 0), true);
     JSStringRelease(propertyName);
     JSStringRef invalidJSON = JSStringCreateWithUTF8CString("fail!");
     if (JSValueMakeFromJSONString(context, invalidJSON)) {
-        printf("FAIL: Should return null for invalid JSON data\n");
+        LOGD("FAIL: Should return null for invalid JSON data\n");
         failed = 1;
     } else
-        printf("PASS: Correctly returned null for invalid JSON data.\n");
+        LOGD("PASS: Correctly returned null for invalid JSON data.\n");
     JSValueRef exception;
     JSStringRef str = JSValueCreateJSONString(context, jsonObject, 0, 0);
     if (!JSStringIsEqualToUTF8CString(str, "{\"aProperty\":true}")) {
-        printf("FAIL: Did not correctly serialise with indent of 0.\n");
+        LOGD("FAIL: Did not correctly serialise with indent of 0.\n");
         failed = 1;
     } else
-        printf("PASS: Correctly serialised with indent of 0.\n");
+        LOGD("PASS: Correctly serialised with indent of 0.\n");
     JSStringRelease(str);
 
     str = JSValueCreateJSONString(context, jsonObject, 4, 0);
     if (!JSStringIsEqualToUTF8CString(str, "{\n    \"aProperty\": true\n}")) {
-        printf("FAIL: Did not correctly serialise with indent of 4.\n");
+        LOGD("FAIL: Did not correctly serialise with indent of 4.\n");
         failed = 1;
     } else
-        printf("PASS: Correctly serialised with indent of 4.\n");
+        LOGD("PASS: Correctly serialised with indent of 4.\n");
     JSStringRelease(str);
     JSStringRef src = JSStringCreateWithUTF8CString("({get a(){ throw '';}})");
     JSValueRef unstringifiableObj = JSEvaluateScript(context, src, NULL, NULL, 1, NULL);
     
     str = JSValueCreateJSONString(context, unstringifiableObj, 4, 0);
     if (str) {
-        printf("FAIL: Didn't return null when attempting to serialize unserializable value.\n");
+        LOGD("FAIL: Didn't return null when attempting to serialize unserializable value.\n");
         JSStringRelease(str);
         failed = 1;
     } else
-        printf("PASS: returned null when attempting to serialize unserializable value.\n");
+        LOGD("PASS: returned null when attempting to serialize unserializable value.\n");
     
     str = JSValueCreateJSONString(context, unstringifiableObj, 4, &exception);
     if (str) {
-        printf("FAIL: Didn't return null when attempting to serialize unserializable value.\n");
+        LOGD("FAIL: Didn't return null when attempting to serialize unserializable value.\n");
         JSStringRelease(str);
         failed = 1;
     } else
-        printf("PASS: returned null when attempting to serialize unserializable value.\n");
+        LOGD("PASS: returned null when attempting to serialize unserializable value.\n");
     if (!exception) {
-        printf("FAIL: Did not set exception on serialisation error\n");
+        LOGD("FAIL: Did not set exception on serialisation error\n");
         failed = 1;
     } else
-        printf("PASS: set exception on serialisation error\n");
+        LOGD("PASS: set exception on serialisation error\n");
     // Conversions that throw exceptions
     exception = NULL;
     ASSERT(NULL == JSValueToObject(context, jsNull, &exception));
@@ -1459,17 +1368,21 @@ extern "C" int jsc_main()
     myConstructor = JSObjectMakeConstructor(context, nullClass, 0);
     JSClassRelease(nullClass);
 
-    char* scriptUTF8 = createStringWithContentsOfFile(scriptPath);
+    //char* scriptUTF8 = createStringWithContentsOfFile(scriptPath);
+    unsigned long iSize = 0;
+    unsigned char* scriptUTF8 = getFileData(scriptPath, "rb", &iSize);
+    LOGD("size = %d", iSize);
+
     if (!scriptUTF8) {
-        printf("FAIL: Test script could not be loaded.\n");
+        LOGD("FAIL: Test script could not be loaded.\n");
         failed = 1;
     } else {
-        script = JSStringCreateWithUTF8CString(scriptUTF8);
+        script = JSStringCreateWithUTF8CString((char*)scriptUTF8);
         result = JSEvaluateScript(context, script, NULL, NULL, 1, &exception);
         if (result && JSValueIsUndefined(context, result))
-            printf("PASS: Test script executed successfully.\n");
+            LOGD("PASS: Test script executed successfully.\n");
         else {
-            printf("FAIL: Test script returned unexpected value:\n");
+            LOGD("FAIL: Test script returned unexpected value:\n");
             JSStringRef exceptionIString = JSValueToStringCopy(context, exception, NULL);
             CFStringRef exceptionCF = JSStringCopyCFString(kCFAllocatorDefault, exceptionIString);
             CFShow(exceptionCF);
@@ -1478,7 +1391,8 @@ extern "C" int jsc_main()
             failed = 1;
         }
         JSStringRelease(script);
-        free(scriptUTF8);
+        //free(scriptUTF8);
+        delete[] scriptUTF8;
     }
 
     // Clear out local variables pointing at JSObjectRefs to allow their values to be collected
@@ -1514,21 +1428,21 @@ extern "C" int jsc_main()
     JSGlobalContextRelease(prototypeLoopContext);
     JSClassRelease(prototypeLoopClass);
 
-    printf("PASS: Infinite prototype chain does not occur.\n");
+    LOGD("PASS: Infinite prototype chain does not occur.\n");
 
     if (checkForCycleInPrototypeChain())
-        printf("PASS: A cycle in a prototype chain can't be created.\n");
+        LOGD("PASS: A cycle in a prototype chain can't be created.\n");
     else {
-        printf("FAIL: A cycle in a prototype chain can be created.\n");
+        LOGD("FAIL: A cycle in a prototype chain can be created.\n");
         failed = true;
     }
 
     if (failed) {
-        printf("FAIL: Some tests failed.\n");
+        LOGD("FAIL: Some tests failed.\n");
         return 1;
     }
 
-    printf("PASS: Program exited normally.\n");
+    LOGD("PASS: Program exited normally.\n");
     return 0;
 }
 
@@ -1542,7 +1456,7 @@ static char* createStringWithContentsOfFile(const char* fileName)
     
     FILE* f = fopen(fileName, "r");
     if (!f) {
-        fprintf(stderr, "Could not open file: %s\n", fileName);
+        LOGD("Could not open file: %s\n", fileName);
         return 0;
     }
     

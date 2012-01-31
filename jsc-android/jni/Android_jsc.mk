@@ -39,7 +39,7 @@ LOCAL_CFLAGS += -DWTF_USE_ACCELERATED_COMPOSITING=1
 endif
 
 
-LOCAL_CFLAGS += -DENABLE_SINGLE_THREADED=1
+LOCAL_CFLAGS += -DENABLE_SINGLE_THREADED=1 -D__LINUX__=1 -DCOMPATIBLE_GCC4=1 -D__LITTLE_ENDIAN__=1
 
 
 JAVASCRIPTCORE_PATH := $(BASE_PATH)/Source/JavaScriptCore
@@ -61,6 +61,7 @@ LOCAL_C_INCLUDES := $(LOCAL_C_INCLUDES) \
 	$(JAVASCRIPTCORE_PATH)/wtf/unicode/icu \
 	$(BASE_PATH)/../platform_external_icu4c/common \
 	$(BASE_PATH)/../platform_external_icu4c/i18n \
+	$(BASE_PATH)/../corefoundation-lite-android \
 	$(JAVASCRIPTCORE_PATH)/parser \
 	$(JAVASCRIPTCORE_PATH)/interpreter \
 	$(JAVASCRIPTCORE_PATH)/jit \
@@ -91,5 +92,5 @@ LOCAL_C_INCLUDES := $(LOCAL_C_INCLUDES) \
 	
 # Build libjs
 LOCAL_STATIC_LIBRARIES := libicui18n libicuuc libcutils
-#LOCAL_SHARED_LIBRARIES := libicuuc libicui18n libcutils
+LOCAL_SHARED_LIBRARIES := libcorefoundation
 include $(BUILD_SHARED_LIBRARY)

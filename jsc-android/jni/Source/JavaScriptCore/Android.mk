@@ -34,6 +34,7 @@ LOCAL_SRC_FILES := \
 	API/JSProfilerPrivate.cpp \
 	API/JSStringRef.cpp \
 	API/JSValueRef.cpp \
+	API/JSStringRefCF.cpp \
 	API/JSWeakObjectMapRefPrivate.cpp \
 	API/OpaqueJSString.cpp \
 	\
