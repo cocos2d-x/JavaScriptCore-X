@@ -107,24 +107,25 @@ static JSValueRef JSNode_getNodeType(JSContextRef context, JSObjectRef object, J
 {
     UNUSED_PARAM(propertyName);
     UNUSED_PARAM(exception);
-
-    Node* node = JSObjectGetPrivate(object);
-    if (node) {
-        JSStringRef nodeType = JSStringCreateWithUTF8CString(node->nodeType);
-        JSValueRef value = JSValueMakeString(context, nodeType);
-        JSStringRelease(nodeType);
-        return value;
+    {
+        Node* node = JSObjectGetPrivate(object);
+        if (node) {
+            JSStringRef nodeType = JSStringCreateWithUTF8CString(node->nodeType);
+            JSValueRef value = JSValueMakeString(context, nodeType);
+            JSStringRelease(nodeType);
+            return value;
+        }
     }
-    
     return NULL;
 }
 
 static JSValueRef JSNode_getChildNodes(JSContextRef context, JSObjectRef thisObject, JSStringRef propertyName, JSValueRef* exception)
 {
+    Node* node = NULL;
     UNUSED_PARAM(propertyName);
     UNUSED_PARAM(exception);
 
-    Node* node = JSObjectGetPrivate(thisObject);
+    node = JSObjectGetPrivate(thisObject);
     ASSERT(node);
     return JSNodeList_new(context, NodeList_new(node));
 }
@@ -147,9 +148,10 @@ static JSStaticValue JSNode_staticValues[] = {
 
 static void JSNode_initialize(JSContextRef context, JSObjectRef object)
 {
+    Node* node = NULL;
     UNUSED_PARAM(context);
 
-    Node* node = JSObjectGetPrivate(object);
+    node = JSObjectGetPrivate(object);
     ASSERT(node);
 
     Node_ref(node);
@@ -165,9 +167,9 @@ static void JSNode_finalize(JSObjectRef object)
 
 JSClassRef JSNode_class(JSContextRef context)
 {
+    static JSClassRef jsClass;
     UNUSED_PARAM(context);
 
-    static JSClassRef jsClass;
     if (!jsClass) {
         JSClassDefinition definition = kJSClassDefinitionEmpty;
         definition.staticValues = JSNode_staticValues;

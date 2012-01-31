@@ -32,39 +32,49 @@
 #include <stdlib.h>
 #include <wtf/Assertions.h>
 #include <wtf/UnusedParam.h>
+#include <windows.h>
 
 static char* createStringWithContentsOfFile(const char* fileName);
 static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception);
 
 int main(int argc, char* argv[])
 {
+    JSGlobalContextRef context;
+    JSObjectRef globalObject;
+    JSStringRef printIString;
+    JSStringRef node;
+    char* scriptUTF8;
+    JSStringRef script;
+    JSValueRef exception;
+    JSValueRef result;
+
     const char *scriptPath = "minidom.js";
     if (argc > 1) {
         scriptPath = argv[1];
     }
+
+    context = JSGlobalContextCreateInGroup(NULL, NULL);
+    globalObject = JSContextGetGlobalObject(context);
     
-    JSGlobalContextRef context = JSGlobalContextCreateInGroup(NULL, NULL);
-    JSObjectRef globalObject = JSContextGetGlobalObject(context);
-    
-    JSStringRef printIString = JSStringCreateWithUTF8CString("print");
+    printIString = JSStringCreateWithUTF8CString("print");
     JSObjectSetProperty(context, globalObject, printIString, JSObjectMakeFunctionWithCallback(context, printIString, print), kJSPropertyAttributeNone, NULL);
     JSStringRelease(printIString);
     
-    JSStringRef node = JSStringCreateWithUTF8CString("Node");
+    node = JSStringCreateWithUTF8CString("Node");
     JSObjectSetProperty(context, globalObject, node, JSObjectMakeConstructor(context, JSNode_class(context), JSNode_construct), kJSPropertyAttributeNone, NULL);
     JSStringRelease(node);
     
-    char* scriptUTF8 = createStringWithContentsOfFile(scriptPath);
-    JSStringRef script = JSStringCreateWithUTF8CString(scriptUTF8);
-    JSValueRef exception;
-    JSValueRef result = JSEvaluateScript(context, script, NULL, NULL, 1, &exception);
+    scriptUTF8 = createStringWithContentsOfFile(scriptPath);
+    script = JSStringCreateWithUTF8CString(scriptUTF8);
+    exception;
+    result = JSEvaluateScript(context, script, NULL, NULL, 1, &exception);
     if (result)
         printf("PASS: Test script executed successfully.\n");
     else {
-        printf("FAIL: Test script threw exception:\n");
         JSStringRef exceptionIString = JSValueToStringCopy(context, exception, NULL);
         size_t exceptionUTF8Size = JSStringGetMaximumUTF8CStringSize(exceptionIString);
         char* exceptionUTF8 = (char*)malloc(exceptionUTF8Size);
+        printf("FAIL: Test script threw exception:\n");
         JSStringGetUTF8CString(exceptionIString, exceptionUTF8, exceptionUTF8Size);
         printf("%s\n", exceptionUTF8);
         free(exceptionUTF8);
@@ -76,7 +86,39 @@ int main(int argc, char* argv[])
     globalObject = 0;
     JSGlobalContextRelease(context);
     printf("PASS: Program exited normally.\n");
+    
     return 0;
+}
+
+// utf8 to gbk
+int UTF8ToGBK(unsigned char * lpUTF8Str,unsigned char * lpGBKStr,int nGBKStrLen)
+{
+    wchar_t * lpUnicodeStr = NULL;
+    int nRetLen = 0;
+    if(!lpUTF8Str)
+        return 0;
+    nRetLen = MultiByteToWideChar(CP_UTF8,0,(char *)lpUTF8Str,-1,0,0);
+    lpUnicodeStr = (WCHAR*)malloc(sizeof(WCHAR)*(nRetLen + 1));
+    nRetLen = MultiByteToWideChar(CP_UTF8,0,(char *)lpUTF8Str,-1,lpUnicodeStr,nRetLen);
+    if(!nRetLen)
+        return 0;
+    nRetLen = WideCharToMultiByte(CP_ACP,0,lpUnicodeStr,-1,0,0,0,0);
+    if(!lpGBKStr)
+    {
+        if(lpUnicodeStr)
+            free(lpUnicodeStr);
+        return nRetLen;
+    }
+    if(nGBKStrLen < nRetLen)
+    {
+        if(lpUnicodeStr)
+            free(lpUnicodeStr);
+        return 0;
+    }
+    nRetLen = WideCharToMultiByte(CP_ACP,0,lpUnicodeStr,-1,(char *)lpGBKStr,nRetLen,0,0);
+    if(lpUnicodeStr)
+        free(lpUnicodeStr);
+    return nRetLen;
 }
 
 static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
@@ -87,9 +129,14 @@ static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef th
     if (argumentCount > 0) {
         JSStringRef string = JSValueToStringCopy(context, arguments[0], exception);
         size_t numChars = JSStringGetMaximumUTF8CStringSize(string);
-        char stringUTF8[numChars];
+        char* stringUTF8 = (char*)malloc(numChars*sizeof(char));
+        char* stringGBK;
         JSStringGetUTF8CString(string, stringUTF8, numChars);
-        printf("%s\n", stringUTF8);
+        stringGBK = (char*)malloc(numChars*sizeof(char)*6);
+        UTF8ToGBK(stringUTF8, stringGBK, numChars*sizeof(char)*6);
+        printf("%s\n", stringGBK);
+        free(stringUTF8);
+        free(stringGBK);
     }
     
     return JSValueMakeUndefined(context);
@@ -98,12 +145,12 @@ static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef th
 static char* createStringWithContentsOfFile(const char* fileName)
 {
     char* buffer;
-    
+    FILE* f;
     size_t buffer_size = 0;
     size_t buffer_capacity = 1024;
     buffer = (char*)malloc(buffer_capacity);
     
-    FILE* f = fopen(fileName, "r");
+    f = fopen(fileName, "r");
     if (!f) {
         fprintf(stderr, "Could not open file: %s\n", fileName);
         return 0;

@@ -40,10 +40,12 @@ Node* Node_new(void)
 void Node_appendChild(Node* node, Node* child)
 {
     Node_ref(child);
-    NodeLink* nodeLink = (NodeLink*)malloc(sizeof(NodeLink));
-    nodeLink->node = child;
-    nodeLink->prev = node->childNodesTail;
-    node->childNodesTail = nodeLink;
+    {
+        NodeLink* nodeLink = (NodeLink*)malloc(sizeof(NodeLink));
+        nodeLink->node = child;
+        nodeLink->prev = node->childNodesTail;
+        node->childNodesTail = nodeLink;
+    }
 }
 
 void Node_removeChild(Node* node, Node* child)

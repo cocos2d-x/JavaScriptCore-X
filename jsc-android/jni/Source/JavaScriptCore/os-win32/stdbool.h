@@ -21,9 +21,9 @@
 #ifndef STDBOOL_WIN32_H
 #define STDBOOL_WIN32_H
 
-#if !COMPILER(MSVC)
-#error "This stdbool.h file should only be compiled with MSVC"
-#endif
+// #if !COMPILER(MSVC)
+// #error "This stdbool.h file should only be compiled with MSVC"
+// #endif
 
 #ifndef __cplusplus
 

@@ -29,9 +29,10 @@
 
 extern NodeList* NodeList_new(Node* parentNode)
 {
+    NodeList* nodeList = NULL;
     Node_ref(parentNode);
 
-    NodeList* nodeList = (NodeList*)malloc(sizeof(NodeList));
+    nodeList = (NodeList*)malloc(sizeof(NodeList));
     nodeList->parentNode = parentNode;
     nodeList->refCount = 0;
     return nodeList;
@@ -52,14 +53,17 @@ extern unsigned NodeList_length(NodeList* nodeList)
 
 extern Node* NodeList_item(NodeList* nodeList, unsigned index)
 {
+    NodeLink* n = NULL;
+    unsigned i = 0;
+    unsigned count = 0;
     unsigned length = NodeList_length(nodeList);
     if (index >= length)
         return NULL;
 
     /* Linear search from tail -- good enough for our purposes here */
-    NodeLink* n = nodeList->parentNode->childNodesTail;
-    unsigned i = 0;
-    unsigned count = length - 1 - index;
+    n = nodeList->parentNode->childNodesTail;
+    
+    count = length - 1 - index;
     while (i < count) {
         ++i;
         n = n->prev;
