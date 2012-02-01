@@ -113,6 +113,10 @@ extern "C" struct tm * localtime(const time_t *timer);
 #include "CallFrame.h"
 #endif
 
+#if OS(QNX)
+using std::abs;
+#endif
+
 #define NaN std::numeric_limits<double>::quiet_NaN()
 
 using namespace WTF;
@@ -692,7 +696,11 @@ double parseES5DateFromNullTerminatedCharacters(const char* dateString)
             return NaN;
         if (*postParsePosition != ':' || (postParsePosition - currentPosition) != 2)
             return NaN;
-        tzHoursAbs = abs(tzHours);
+#ifdef __QNX__
+        tzHoursAbs = abs((int)tzHours);
+#else
+		tzHoursAbs = abs(tzHours);
+#endif
         currentPosition = postParsePosition + 1;
         
         if (!isASCIIDigit(*currentPosition))

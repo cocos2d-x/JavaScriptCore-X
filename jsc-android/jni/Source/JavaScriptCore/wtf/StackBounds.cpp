@@ -45,6 +45,8 @@
 #include <sys/procfs.h>
 #include <stdio.h>
 #include <errno.h>
+#include <pthread.h>
+#include <string.h>
 
 #elif OS(UNIX)
 

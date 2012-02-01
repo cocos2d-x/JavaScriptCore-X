@@ -32,7 +32,10 @@
 #include <stdlib.h>
 #include <wtf/Assertions.h>
 #include <wtf/UnusedParam.h>
+
+#ifdef WIN32
 #include <windows.h>
+#endif
 
 static char* createStringWithContentsOfFile(const char* fileName);
 static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception);
@@ -48,7 +51,11 @@ int main(int argc, char* argv[])
     JSValueRef exception;
     JSValueRef result;
 
-    const char *scriptPath = "minidom.js";
+#ifdef __QNX__
+    const char *scriptPath = "app/native/Resource/minidom.js";
+#else
+	const char *scriptPath = "minidom.js";
+#endif
     if (argc > 1) {
         scriptPath = argv[1];
     }
@@ -66,7 +73,7 @@ int main(int argc, char* argv[])
     
     scriptUTF8 = createStringWithContentsOfFile(scriptPath);
     script = JSStringCreateWithUTF8CString(scriptUTF8);
-    exception;
+
     result = JSEvaluateScript(context, script, NULL, NULL, 1, &exception);
     if (result)
         printf("PASS: Test script executed successfully.\n");
@@ -90,6 +97,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+#ifdef WIN32
 // utf8 to gbk
 int UTF8ToGBK(unsigned char * lpUTF8Str,unsigned char * lpGBKStr,int nGBKStrLen)
 {
@@ -120,7 +128,7 @@ int UTF8ToGBK(unsigned char * lpUTF8Str,unsigned char * lpGBKStr,int nGBKStrLen)
         free(lpUnicodeStr);
     return nRetLen;
 }
-
+#endif
 static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
 {
     UNUSED_PARAM(object);
@@ -132,11 +140,16 @@ static JSValueRef print(JSContextRef context, JSObjectRef object, JSObjectRef th
         char* stringUTF8 = (char*)malloc(numChars*sizeof(char));
         char* stringGBK;
         JSStringGetUTF8CString(string, stringUTF8, numChars);
+#ifdef WIN32
         stringGBK = (char*)malloc(numChars*sizeof(char)*6);
         UTF8ToGBK(stringUTF8, stringGBK, numChars*sizeof(char)*6);
         printf("%s\n", stringGBK);
+		free(stringGBK);
+#else
+		printf("%s\n", stringUTF8);
+#endif
         free(stringUTF8);
-        free(stringGBK);
+        
     }
     
     return JSValueMakeUndefined(context);

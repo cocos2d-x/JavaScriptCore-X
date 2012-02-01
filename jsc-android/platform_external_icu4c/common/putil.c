@@ -48,6 +48,11 @@
 #endif
 #endif
 
+#ifdef __QNX__
+#undef _XOPEN_SOURCE
+#define _XOPEN_SOURCE 600
+#endif
+
 /* Make sure things like readlink and such functions work.
 Poorly upgraded Solaris machines can't have this defined.
 Cleanly installed Solaris can use this #define.

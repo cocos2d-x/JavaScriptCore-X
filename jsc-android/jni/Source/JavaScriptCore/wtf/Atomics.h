@@ -99,6 +99,8 @@ inline int atomicDecrement(int volatile* addend) { return OSAtomicDecrement32Bar
 inline int atomicIncrement(int volatile* addend) { return android_atomic_inc(addend); }
 inline int atomicDecrement(int volatile* addend) { return android_atomic_dec(addend); }
 
+#elif OS(QNX)
+#define WTF_USE_LOCKFREE_THREADSAFEREFCOUNTED 0
 #elif COMPILER(GCC) && !CPU(SPARC64) && !OS(SYMBIAN) // sizeof(_Atomic_word) != sizeof(int) on sparc64 gcc
 #define WTF_USE_LOCKFREE_THREADSAFEREFCOUNTED 1
 

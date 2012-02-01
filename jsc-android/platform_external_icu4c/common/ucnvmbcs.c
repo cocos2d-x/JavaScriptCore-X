@@ -56,6 +56,10 @@
 #include "cmemory.h"
 #include "cstring.h"
 
+#ifdef __QNX__
+#undef si_value
+#endif
+
 /* control optimizations according to the platform */
 #define MBCS_UNROLL_SINGLE_TO_BMP 1
 #define MBCS_UNROLL_SINGLE_FROM_BMP 0
@@ -3938,8 +3942,8 @@ ucnv_MBCSFromUnicodeWithOffsets(UConverterFromUnicodeArgs *pArgs,
     uint32_t stage2Entry;
     uint32_t asciiRoundtrips;
     uint32_t value;
-    uint8_t si_value[2] = {0, 0}; 
-    uint8_t so_value[2] = {0, 0}; 
+    uint8_t si_value[2] = {0, 0};
+    uint8_t so_value[2] = {0, 0};
     uint8_t si_value_length, so_value_length;
     int32_t length = 0, prevLength;
     uint8_t unicodeMask;
