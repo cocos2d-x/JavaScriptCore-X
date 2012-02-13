@@ -23,6 +23,9 @@
 ## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ##
 
+# not compile corefundation library for android.
+# API/JSStringRefCF.cpp  
+
 LOCAL_SRC_FILES := \
     API/JSBase.cpp \
 	API/JSCallbackConstructor.cpp \
@@ -34,11 +37,10 @@ LOCAL_SRC_FILES := \
 	API/JSProfilerPrivate.cpp \
 	API/JSStringRef.cpp \
 	API/JSValueRef.cpp \
-	API/JSStringRefCF.cpp \
 	API/JSWeakObjectMapRefPrivate.cpp \
 	API/OpaqueJSString.cpp \
 	\
-	assembler/ARMv7Assembler.cpp \
+	assembler/ARMAssembler.cpp \
 	\
 	bytecode/CodeBlock.cpp \
 	bytecode/JumpTable.cpp \

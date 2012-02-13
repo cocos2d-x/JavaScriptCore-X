@@ -35,8 +35,8 @@ LOCAL_SRC_FILES := hello-jni.cpp \
                    unzip.cpp \
                    minidom.cpp \
                    ioapi.cpp \
-                   testapi.cpp \
                    utils.cpp 
+# testapi.cpp 
 
 LOCAL_LDLIBS :=  -lz -llog
 

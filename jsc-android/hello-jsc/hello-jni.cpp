@@ -45,10 +45,12 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
     minidom_main();
     LOGD("-------------------minidom_end-------------------------");
     LOGD("-------------------------------------------------------");
+    /*
     LOGD("-------------------testapi_begin-------------------------");
     testapi_main();
     LOGD("-------------------testapi_end-------------------------");
     LOGD("-------------------------------------------------------");
+    */
     return env->NewStringUTF("Hello JavaScriptCore !");
 }
 
