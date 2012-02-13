@@ -8,7 +8,9 @@ cd /your_path/android-ndk-r6
 ./ndk_build -C /your_path2/JavaScriptCore-X/jsc-android/
 
 -- For Win32
-1. Set environment variable
+1. Install 'Safari' browser for win32(download website: http://www.apple.com/safari/download/). This step is necessary, otherwise, jsc application cannot be launched.
+
+2. Set environment variable
 
 name: WEBKITLIBRARIESDIR
 value: F:\Project\JavaScriptCore-X\jsc-android\jni\WebKitLibraries\win   (Please replace 'F:\Project' to your project's root path)
@@ -19,9 +21,9 @@ value: F:\Project\JavaScriptCore-X\jsc-android\jni\WebKitBuild   (Please replace
 name: SystemDrive
 value: E:   (Please replace 'E:' to the root path of cygwin)
 
-2. Logout or reboot your computer, you can not start vs2008 if you don't do this.
+3. Logout or reboot your computer, you can not start vs2008 if you don't do this.
 
-3. Open 'JavaScriptCore-X\jsc-android\jni\Source\JavaScriptCore\JavaScriptCore.vcproj\JavaScriptCore.sln' by VS2008 and build all projects.
+4. Open 'JavaScriptCore-X\jsc-android\jni\Source\JavaScriptCore\JavaScriptCore.vcproj\JavaScriptCore.sln' by VS2008 and build all projects.
 
 
 
