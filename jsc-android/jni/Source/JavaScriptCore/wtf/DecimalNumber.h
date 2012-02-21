@@ -31,6 +31,8 @@
 #include <wtf/MathExtras.h>
 #include <wtf/text/WTFString.h>
 
+using namespace std;
+
 namespace WTF {
 
 enum RoundingSignificantFiguresType { RoundingSignificantFigures };

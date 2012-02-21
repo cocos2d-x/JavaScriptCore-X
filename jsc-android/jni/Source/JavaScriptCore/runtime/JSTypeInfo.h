@@ -70,7 +70,7 @@ namespace JSC {
         bool overridesMarkChildren() const { return m_flags & OverridesMarkChildren; }
         bool overridesGetPropertyNames() const { return m_flags & OverridesGetPropertyNames; }
         unsigned flags() const { return m_flags; }
-        unsigned isFinal() const { return m_flags2 && (IsJSFinalObject >> 8); }
+        unsigned isFinal() const { return m_flags2 & (IsJSFinalObject >> 8); }
 
         static ptrdiff_t flagsOffset()
         {
