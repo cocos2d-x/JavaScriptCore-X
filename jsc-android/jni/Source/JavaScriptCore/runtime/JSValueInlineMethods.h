@@ -28,6 +28,8 @@
 
 #include "JSValue.h"
 
+using namespace std;
+
 namespace JSC {
 
     ALWAYS_INLINE int32_t JSValue::toInt32(ExecState* exec) const

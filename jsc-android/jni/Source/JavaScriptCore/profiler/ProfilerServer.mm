@@ -30,10 +30,6 @@
 #import "JSRetainPtr.h"
 #import <Foundation/Foundation.h>
 
-#if PLATFORM(IOS_SIMULATOR)
-#import <Foundation/NSDistributedNotificationCenter.h>
-#endif
-
 @interface ProfilerServer : NSObject {
 @private
     NSString *_serverName;
@@ -68,8 +64,8 @@
 #if !PLATFORM(IOS) || PLATFORM(IOS_SIMULATOR)
     // FIXME: <rdar://problem/6546135>
     // The catch-all notifications
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(startProfiling) name:@"ProfilerServerStartNotification" object:nil];
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProfiling) name:@"ProfilerServerStopNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startProfiling) name:@"ProfilerServerStartNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProfiling) name:@"ProfilerServerStopNotification" object:nil];
 #endif
 
     // The specific notifications
@@ -78,8 +74,8 @@
 
 #if !PLATFORM(IOS) || PLATFORM(IOS_SIMULATOR)
     // FIXME: <rdar://problem/6546135>
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(startProfiling) name:[_serverName stringByAppendingString:@"-Start"] object:nil];
-    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProfiling) name:[_serverName stringByAppendingString:@"-Stop"] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startProfiling) name:[_serverName stringByAppendingString:@"-Start"] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopProfiling) name:[_serverName stringByAppendingString:@"-Stop"] object:nil];
 #endif
 
     [pool drain];
