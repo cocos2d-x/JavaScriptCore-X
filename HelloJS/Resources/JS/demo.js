@@ -1,4 +1,4 @@
-var batch = new CCSpriteBatchNode("icon_xp.png");
+var batch = CCSpriteBatchNode.batchNodeWithFile("icon_xp.png");
 var total = 500;
 
 debug.log("total sprites: " + total);

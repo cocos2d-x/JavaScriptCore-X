@@ -28,6 +28,9 @@ class S_CCSpriteBatchNode : public cocos2d::CCSpriteBatchNode, public S_TouchDel
 public:
 	SCRIPTABLE_BOILERPLATE
 	SCRIPTABLE_BOILERPLATE_CCNODE
+
+    JS_STATIC_FUNC_DEF(jsBatchNodeWithTexture);
+    JS_STATIC_FUNC_DEF(jsBatchNodeWithFile);
 };
 
 #endif

@@ -16,6 +16,7 @@ using namespace cocos2d;
 JSClassRef js_S_CCMenu_class;
 
 SCRIPTABLE_BOILERPLATE_IMP(S_CCMenu)
+SCRIPTABLE_BOILERPLATE_IMP_CCNODE(S_CCMenu, CCMenu)
 
 JS_STATIC_FUNC_IMP(S_CCMenu, jsMenuWithItems)
 {
@@ -27,22 +28,22 @@ JS_STATIC_FUNC_IMP(S_CCMenu, jsMenuWithItems)
  * onExit
  */
 
-void S_CCMenu::onExit()
-{
-	CCMenu::onExit();
-}
-
-void S_CCMenu::setParent(CCNode *var)
-{
-	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
-	JSObjectRef thisObject = (JSObjectRef)this->getUserData();
-	if (!var && thisObject) {
-		JSValueUnprotect(ctx, thisObject);
-	} else if (var && thisObject) {
-		JSValueProtect(ctx, thisObject);
-	}
-	CCMenu::setParent(var);
-}
+// void S_CCMenu::onExit()
+// {
+// 	CCMenu::onExit();
+// }
+// 
+// void S_CCMenu::setParent(CCNode *var)
+// {
+// 	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
+// 	JSObjectRef thisObject = (JSObjectRef)this->getUserData();
+// 	if (!var && thisObject) {
+// 		JSValueUnprotect(ctx, thisObject);
+// 	} else if (var && thisObject) {
+// 		JSValueProtect(ctx, thisObject);
+// 	}
+// 	CCMenu::setParent(var);
+// }
 
 JSStaticFunction* S_CCMenu::jsStaticFunctions()
 {

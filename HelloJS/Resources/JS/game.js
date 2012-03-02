@@ -239,7 +239,7 @@ Game.start = function () {
 	CCSpriteFrameCache.addSpriteFramesWithFile("tiles.plist");
 	
 	Game.matrix = new Array(Game.COLS * Game.ROWS);
-	Game.batchNode = new CCSpriteBatchNode("tiles.png");
+	Game.batchNode = CCSpriteBatchNode.batchNodeWithFile("tiles.png");
 	Game.batchNode.setPosition(new CCPoint(0, 0));
 	Game.batchNode.setAnchorPoint(new CCPoint(0, 0));
 

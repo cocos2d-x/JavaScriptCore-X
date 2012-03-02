@@ -122,7 +122,7 @@ var TILE_SPECS = [
  */
 var Block = function () {
 	// every block is a new batch node
-	this.batchNode = new CCSpriteBatchNode("tiles.png");
+	this.batchNode = CCSpriteBatchNode.batchNodeWithFile("tiles.png");
 	this.batchNode.setAnchorPoint(0, 0);
 	this.matrix = [];
 	this.cols = 0;
