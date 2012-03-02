@@ -6,8 +6,8 @@
 //  Copyright (c) 2011 XXX. All rights reserved.
 //
 
-#ifndef cocos2dx-javascript_S_CCSpriteFrame_h
-#define cocos2dx-javascript_S_CCSpriteFrame_h
+#ifndef cocos2dx_javascript_S_CCSpriteFrame_h
+#define cocos2dx_javascript_S_CCSpriteFrame_h
 
 #include "cocos2d.h"
 #include "ScriptingCore.h"

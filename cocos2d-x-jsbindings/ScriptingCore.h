@@ -155,7 +155,7 @@ public:
 	 * @param buff must be a valid pointer that can hold enough data (?)
 	 * @return the exception formatted
 	 */
-	void formatException(JSValueRef exception, char *buff);
+	void printException(JSValueRef exception);
 
 	/**
 	 * just clear the hash that holds the scripts loaded

@@ -17,6 +17,11 @@ JSClassRef js_S_CCMenu_class;
 
 SCRIPTABLE_BOILERPLATE_IMP(S_CCMenu)
 
+JS_STATIC_FUNC_IMP(S_CCMenu, jsMenuWithItems)
+{
+    return jsConstructor(ctx, thisObject, argumentCount, arguments, exception);
+}
+
 /**
  * manually implement onExit and setParent to avoid the confusion for menu
  * onExit
@@ -41,7 +46,12 @@ void S_CCMenu::setParent(CCNode *var)
 
 JSStaticFunction* S_CCMenu::jsStaticFunctions()
 {
-	return NULL;
+    static JSStaticFunction funcs[] = {
+        {"menuWithItems", S_CCMenu::jsMenuWithItems, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
+        {0, 0, 0}
+    };
+
+    return funcs;
 }
 
 bool S_CCMenu::initWithContext(JSContextRef ctx, JSObjectRef obj, size_t argumentCount, const JSValueRef arguments[])
@@ -49,6 +59,12 @@ bool S_CCMenu::initWithContext(JSContextRef ctx, JSObjectRef obj, size_t argumen
 	if (!CCMenu::init()) {
 		return false;
 	}
+    for (int i = 0; i < argumentCount; i++)
+    {
+        JSObjectRef args = JSValueToObject(ctx, arguments[i], NULL);
+        CCNode* pNode = (CCNode*)JSObjectGetPrivate(args);
+        this->addChild(pNode, 0);
+    }
 	setUserData(obj);
 	return true;
 }
