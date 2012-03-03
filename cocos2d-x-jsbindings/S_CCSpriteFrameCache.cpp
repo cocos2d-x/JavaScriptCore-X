@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#import "S_CCSpriteFrameCache.h"
+#include "S_CCSpriteFrameCache.h"
 
 using namespace cocos2d;
 

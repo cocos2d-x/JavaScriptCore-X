@@ -3,6 +3,9 @@ These sources are cloned from http://android.googlesource.com/ master branch at 
 Please be ware that JavaScriptCore is open source under LGPL license!
 
 - How to build
+-- For IOS
+Just click 'JavaScriptCore-X\jsc-android\jni\Source\JavaScriptCore\JavaScriptCore.xcodeproj' to compile.
+
 -- For Android
 cd /your_path/android-ndk-r6
 ./ndk_build -C /your_path2/JavaScriptCore-X/jsc-android/

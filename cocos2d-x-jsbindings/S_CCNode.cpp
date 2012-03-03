@@ -450,23 +450,24 @@ JS_STATIC_FUNC_IMP(S_CCNode, jsUnregisterAsTouchHandler)
 JSClassRef js_S_CCScene_class;
 
 SCRIPTABLE_BOILERPLATE_IMP(S_CCScene)
+SCRIPTABLE_BOILERPLATE_IMP_CCNODE(S_CCScene, CCScene)
 
-void S_CCScene::onExit()
-{
-	CCScene::onExit();
-}
-
-void S_CCScene::setParent(CCNode *var)
-{
-	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
-	JSObjectRef thisObject = (JSObjectRef)this->getUserData();
-	if (!var && thisObject) {
-		JSValueUnprotect(ctx, thisObject);
-	} else if (var && thisObject) {
-		JSValueProtect(ctx, thisObject);
-	}
-	CCScene::setParent(var);
-}
+// void S_CCScene::onExit()
+// {
+// 	CCScene::onExit();
+// }
+// 
+// void S_CCScene::setParent(CCNode *var)
+// {
+// 	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
+// 	JSObjectRef thisObject = (JSObjectRef)this->getUserData();
+// 	if (!var && thisObject) {
+// 		JSValueUnprotect(ctx, thisObject);
+// 	} else if (var && thisObject) {
+// 		JSValueProtect(ctx, thisObject);
+// 	}
+// 	CCScene::setParent(var);
+// }
 
 JSStaticFunction* S_CCScene::jsStaticFunctions()
 {

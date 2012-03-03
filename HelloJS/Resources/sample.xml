@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skeleton>
+    <name>Human</name>
+    <bones>
+        <bone>
+            <name>ArmR</name>
+            <position>
+                <x>260</x>
+                <y>336</y>
+            </position>
+        </bone>
+        <bone>
+            <name>ForearmR</name>
+            <position>
+                <x>124</x>
+                <y>233</y>
+            </position>
+        </bone>
+    </bones>
+</skeleton>

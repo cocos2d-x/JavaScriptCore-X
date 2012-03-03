@@ -33,7 +33,7 @@ struct cmp_objects
 	}
 };
 
-typedef std::map<int, JSScheduleCallback *> callback_map;
+typedef std::map<int, JSScheduleCallback *, cmp_objects> callback_map;
 
 class S_CCScheduler
 {	

@@ -57,7 +57,7 @@ bool S_CCTransitionSceneOriented::initWithContext(JSContextRef ctx, JSObjectRef 
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation orientation = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation orientation = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionSceneOriented::initWithDuration(t, scene, orientation)) {
 			result = true;
 		}
@@ -394,7 +394,7 @@ bool S_CCTransitionFlipX::initWithContext(JSContextRef ctx, JSObjectRef obj, siz
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionFlipX::initWithDuration(t, scene, o)) {
 			result = true;
 		}
@@ -423,7 +423,7 @@ bool S_CCTransitionFlipY::initWithContext(JSContextRef ctx, JSObjectRef obj, siz
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionFlipY::initWithDuration(t, scene, o)) {
 			result = true;
 		}
@@ -452,7 +452,7 @@ bool S_CCTransitionFlipAngular::initWithContext(JSContextRef ctx, JSObjectRef ob
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionFlipAngular::initWithDuration(t, scene, o)) {
 			result = true;
 		}
@@ -481,7 +481,7 @@ bool S_CCTransitionZoomFlipX::initWithContext(JSContextRef ctx, JSObjectRef obj,
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionZoomFlipX::initWithDuration(t, scene, o)) {
 			result = true;
 		}
@@ -510,7 +510,7 @@ bool S_CCTransitionZoomFlipY::initWithContext(JSContextRef ctx, JSObjectRef obj,
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionZoomFlipY::initWithDuration(t, scene, o)) {
 			result = true;
 		}
@@ -539,7 +539,7 @@ bool S_CCTransitionZoomFlipAngular::initWithContext(JSContextRef ctx, JSObjectRe
 	if (argumentCount == 3) {
 		ccTime t = JSValueToNumber(ctx, arguments[0], NULL);
 		CCScene *scene = (CCScene *)JSObjectGetPrivate((JSObjectRef)arguments[1]);
-		tOrientation o = (tOrientation)JSValueToNumber(ctx, arguments[2], NULL);
+		tOrientation o = (tOrientation)((int)JSValueToNumber(ctx, arguments[2], NULL));
 		if (scene && CCTransitionZoomFlipAngular::initWithDuration(t, scene, o)) {
 			result = true;
 		}

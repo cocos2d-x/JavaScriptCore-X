@@ -15,14 +15,16 @@
 
 using namespace cocos2d;
 
-class S_CCMenu : CCMenu
+class S_CCMenu : public CCMenu
 {
 public:
 	SCRIPTABLE_BOILERPLATE
 	SCRIPTABLE_BOILERPLATE_CCNODE
+
+    JS_STATIC_FUNC_DEF(jsMenuWithItems);
 };
 
-class S_CCMenuItem : CCMenuItem
+class S_CCMenuItem : public CCMenuItem
 {
 	JSObjectRef m_Callback;
 public:
@@ -37,7 +39,7 @@ public:
 	virtual void menuHandler(CCObject* pSender);
 };
 
-class S_CCMenuItemLabel : CCMenuItemLabel
+class S_CCMenuItemLabel : public CCMenuItemLabel
 {
 	JSObjectRef m_Callback;
 public:
@@ -49,7 +51,7 @@ public:
 	virtual void menuHandler(CCObject* pSender);
 };
 
-class S_CCMenuItemSprite : CCMenuItemSprite
+class S_CCMenuItemSprite : public CCMenuItemSprite
 {
 	JSObjectRef m_Callback;
 public:
