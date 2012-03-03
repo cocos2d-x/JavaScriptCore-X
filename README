@@ -1,0 +1,19 @@
+How to build HelloJS on ios, android and win32 ?
+1. Download the latest code of cocos2d-x from https://github.com/cocos2d/cocos2d-x. And extract it anywhere.
+
+2. Copy 'cocos2d-x-jsbinding' and 'HelloJS' folders to root folder of cocos2d-x you have extracted, rename 'cocos2d-x-jsbinding' to 'JSBindings'.
+
+3. Build HelloJS on ios:
+        Enter HelloJS/ios folder, and click HelloJS.xcodeproj.
+
+4. Build HelloJS on android:
+        Enter HelloJS/android folder, modify ndk and the root path of your cocos2d-x project in 'build_native.sh', execute command by './build_native.sh'.   
+
+5. Build HelloJS on win32:
+        (1) If you haven't install 'Safari' browser of win32 version, please download from http://www.apple.com/safari/download/. I don't know why we should do this step, however, this step is necessary, otherwise, jsc application cannot be launched. Maybe safari does some changes to registry.
+	(2) Click 'cocos2d-win32.vc2008.sln' and add HelloJS project to our solution by "right click (Solution 'cocos2d-win32.vc2008')-->(Add)-->(Existing Project)-->(select HelloJS\win32\HelloJS.win32.vcproj)".
+        (3) Set HelloJS as a startup project.
+        (4) Set Project Dependencies of HelloJS, check the box of libcocos2d and libCocosDenshion. 
+        (5) Build and run the project.
+
+About how to build JavaScriptCore on ios, android and win32, please read the README file in the 'jsc-android' folder.
