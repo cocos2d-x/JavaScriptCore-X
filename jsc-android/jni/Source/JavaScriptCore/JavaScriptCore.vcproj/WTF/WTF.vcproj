@@ -91,6 +91,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				WarnAsError="false"
+				DisableSpecificWarnings="4396"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

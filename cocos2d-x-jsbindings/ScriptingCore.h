@@ -38,7 +38,10 @@ void   jsUpdate(cocos2d::ccTime delta);
 
 #define SCRIPTABLE_BOILERPLATE_CCNODE \
 virtual void setParent(cocos2d::CCNode *var); \
-virtual void onExit();
+virtual void onExit(); \
+virtual void onEnter(); \
+virtual void onEnterTransitionDidFinish();  \
+virtual void callJsFunction(char* pszFunName); 
 
 /**
  * ScriptableObject boilerplate implementation
@@ -80,12 +83,23 @@ void klass::onExit() \
 }
 
 #define SCRIPTABLE_BOILERPLATE_IMP_CCNODE(klass, ccKlass) \
+void klass::onEnter() \
+{ \
+    ccKlass::onEnter(); \
+    callJsFunction("onEnter"); \
+} \
+void klass::onEnterTransitionDidFinish() \
+{ \
+    ccKlass::onEnterTransitionDidFinish(); \
+    callJsFunction("onEnterTransitionDidFinish"); \
+} \
 void klass::onExit() \
 { \
 	S_TouchDelegate *delegate = dynamic_cast<S_TouchDelegate *>(this); \
 	if (delegate && delegate->m_TouchRegistered) { \
 		CCTouchDispatcher::sharedDispatcher()->removeDelegate(delegate); \
 	} \
+    callJsFunction("onExit"); \
 	ccKlass::onExit(); \
 } \
 void klass::setParent(CCNode *var) \
@@ -97,7 +111,23 @@ void klass::setParent(CCNode *var) \
 	} else if (var && thisObject) { \
 		JSValueProtect(ctx, thisObject); \
 	} \
-	CCNode::setParent(var); \
+	ccKlass::setParent(var); \
+} \
+void klass::callJsFunction(char* pszFunName) \
+{ \
+    JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext(); \
+    JSObjectRef thisObject = (JSObjectRef)getUserData(); \
+    if (thisObject) \
+    { \
+        CCAssert(pszFunName && strlen(pszFunName) > 0, "function name must not be empty!"); \
+        JSStringRef jsName = JSStringCreateWithUTF8CString(pszFunName); \
+        if (JSObjectHasProperty(ctx, thisObject, jsName)) \
+        { \
+            JSObjectRef cb = JSValueToObject(ctx, JSObjectGetProperty(ctx, thisObject, jsName, NULL), NULL); \
+            JSObjectCallAsFunction(ctx, cb, NULL, 0, NULL, NULL); \
+        } \
+        JSStringRelease(jsName); \
+    } \
 }
 
 class S_TouchDelegate : public cocos2d::CCTouchDelegate
@@ -155,7 +185,7 @@ public:
 	 * @param buff must be a valid pointer that can hold enough data (?)
 	 * @return the exception formatted
 	 */
-	void formatException(JSValueRef exception, char *buff);
+	void printException(JSValueRef exception);
 
 	/**
 	 * just clear the hash that holds the scripts loaded

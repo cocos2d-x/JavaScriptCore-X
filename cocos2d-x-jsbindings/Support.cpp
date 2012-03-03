@@ -8,7 +8,9 @@
 
 #include <stdio.h>
 #include "ScriptingCore.h"
+#include "cocos2d.h"
 
+USING_NS_CC;
 //
 // Eval an anonymous function with a custom 'this'.
 //	Used to easily inspect and manipulate a JSValue
@@ -37,8 +39,9 @@ JSValueRef js_log(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject
 	for (int i = 0; i < argumentCount; i++) {
 		JSStringRef resultStringJS = JSValueToStringCopy(ctx, arguments[i], NULL);
 		JSStringGetUTF8CString(resultStringJS, buff, 1024);
-		fprintf(stdout, "%s\n", buff);
-		fflush(stdout);
+// 		fprintf(stdout, "%s\n", buff);
+// 		fflush(stdout);
+        CCLog(buff);
 		JSStringRelease(resultStringJS);
 	}
 	return JSValueMakeUndefined(ctx);

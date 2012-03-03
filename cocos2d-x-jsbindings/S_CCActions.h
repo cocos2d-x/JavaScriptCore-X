@@ -17,7 +17,7 @@
 
 using namespace cocos2d;
 
-class S_CCAction : CCAction
+class S_CCAction : public cocos2d::CCAction
 {
 public:
 	// actions do not have a userData field
@@ -312,7 +312,7 @@ public:
 
 /////////
 
-class S_CCCallFunc : CCCallFunc
+class S_CCCallFunc : public CCCallFunc
 {
 	JSObjectRef jsObject;
 	JSObjectRef callback;
