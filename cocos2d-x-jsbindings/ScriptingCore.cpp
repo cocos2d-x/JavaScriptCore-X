@@ -524,11 +524,8 @@ void ScriptingCore::runScript(const char *fpath)
 	
 	m_loadedFiles[hash] = true;
 	// NSString *data = [NSString stringWithContentsOfFile:nsPath encoding:NSUTF8StringEncoding error:NULL];
-    // we must use CCFileUtils::getFileData to get the data, 
-    // because resources on android are packed as a zipball, 
-    // this function implementation on android will unpack the zipball and read the data successfully.
-    unsigned long iSize = 0;
-    unsigned char* data = CCFileUtils::getFileData(realPath, "rb", &iSize);
+    // we must use CCString::stringWithContentsOfFile to get the string, 
+    char* data = CCString::stringWithContentsOfFile(realPath);
 	
 	JSStringRef sourceURL = JSStringCreateWithUTF8CString(fpath);
 	JSStringRef script = JSStringCreateWithUTF8CString((char*)data);
