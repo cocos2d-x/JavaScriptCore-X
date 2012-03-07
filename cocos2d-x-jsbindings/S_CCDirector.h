@@ -19,11 +19,12 @@ class S_CCDirector
 	
 public:
 	SCRIPTABLE_BOILERPLATE
-	
+    JS_STATIC_FUNC_DEF(jsGetWinSize);
 	JS_STATIC_FUNC_DEF(jsRunWithScene);
 	JS_STATIC_FUNC_DEF(jsReplaceScene);
 	JS_STATIC_FUNC_DEF(jsPushScene);
 	JS_STATIC_FUNC_DEF(jsPopScene);
+    JS_STATIC_FUNC_DEF(jsEnd);
 };
 
 #endif

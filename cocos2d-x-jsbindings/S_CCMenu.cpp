@@ -210,3 +210,48 @@ void S_CCMenuItemSprite::menuHandler(CCObject* pSender)
 	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
 	JSObjectCallAsFunction(ctx, m_Callback, NULL, 0, NULL, NULL);
 }
+
+JSClassRef js_S_CCMenuItemImage_class;
+
+SCRIPTABLE_BOILERPLATE_IMP(S_CCMenuItemImage)
+SCRIPTABLE_BOILERPLATE_IMP_CCNODE(S_CCMenuItemImage, CCMenuItemImage)
+
+JSStaticFunction* S_CCMenuItemImage::jsStaticFunctions()
+{
+	return NULL;
+}
+
+bool S_CCMenuItemImage::initWithContext(JSContextRef ctx, JSObjectRef obj, size_t argumentCount, const JSValueRef arguments[])
+{
+	// TODO: add disabled sprite, perhaps based on the number of arguments
+	if (argumentCount == 3) {
+		JSStringRef jsNormalImage   = JSValueToStringCopy(ctx, arguments[0], NULL);
+		JSStringRef jsSelectedImage = JSValueToStringCopy(ctx, arguments[1], NULL);
+		JSObjectRef func = JSValueToObject(ctx, arguments[2], NULL);
+        char szNormalImage[100] = {0};
+        char szSelectedImage[100] = {0};
+        JSStringGetUTF8CString(jsNormalImage, szNormalImage, sizeof(szNormalImage));
+        JSStringGetUTF8CString(jsSelectedImage, szSelectedImage, sizeof(szSelectedImage));
+        JSStringRelease(jsNormalImage);
+        JSStringRelease(jsSelectedImage);
+		// we only require normal and selected, disabled can be NULL
+		if (!szNormalImage[0] ||
+			!szSelectedImage[0] ||
+			!JSObjectIsFunction(ctx, func) ||
+			!CCMenuItemImage::initFromNormalImage(szNormalImage, szSelectedImage, NULL, this, menu_selector(S_CCMenuItemImage::menuHandler)))
+		{
+			return false;
+		}
+		m_Callback = func;
+		JSValueProtect(ctx, m_Callback);
+		setUserData(obj);
+		return true;
+	}
+	return false;
+}
+
+void S_CCMenuItemImage::menuHandler(CCObject* pSender)
+{
+	JSContextRef ctx = ScriptingCore::getInstance().getGlobalContext();
+	JSObjectCallAsFunction(ctx, m_Callback, NULL, 0, NULL, NULL);
+}

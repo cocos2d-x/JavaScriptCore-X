@@ -63,4 +63,16 @@ public:
 	virtual void menuHandler(CCObject* pSender);
 };
 
+class S_CCMenuItemImage : public CCMenuItemImage
+{
+    JSObjectRef m_Callback;
+public:
+    S_CCMenuItemImage() : CCMenuItemImage(), m_Callback(NULL) {};
+
+    SCRIPTABLE_BOILERPLATE
+    SCRIPTABLE_BOILERPLATE_CCNODE
+
+    virtual void menuHandler(CCObject* pSender);
+};
+
 #endif

@@ -1,5 +1,5 @@
-require("JS/game.js");
-require("JS/block.js");
+require("JS/helloworld/game.js");
+require("JS/helloworld/block.js");
 
 var MainMenu = {};
 MainMenu.start = function () {
