@@ -20,9 +20,9 @@ var ActionsDemoLayer = Class.extend({
 
     onEnter: function() {
         var s = CCDirector.getWinSize();
-        this._grossini = CCSprite.spriteWithFile(RC.s_pPathGrossini);
-        this._tamara = CCSprite.spriteWithFile(RC.s_pPathSister1);
-        this._kathia = CCSprite.spriteWithFile(RC.s_pPathSister2);
+        this._grossini = new CCSprite(RC.s_pPathGrossini);
+        this._tamara = new CCSprite(RC.s_pPathSister1);
+        this._kathia = new CCSprite(RC.s_pPathSister2);
         this._layer.addChild(this._grossini, 1);
         this._layer.addChild(this._tamara, 2);
         this._layer.addChild(this._kathia, 3);
@@ -48,7 +48,7 @@ var ActionsDemoLayer = Class.extend({
         var item2 = new CCMenuItemImage(RC.s_pPathR1, RC.s_pPathR2, this.restartCallback);
         var item3 = new CCMenuItemImage(RC.s_pPathF1, RC.s_pPathF2, this.nextCallback);
 
-        var menu = CCMenu.menuWithItems(item1, item2, item3);
+        var menu = new CCMenu(item1, item2, item3);
 
         menu.setPosition( new CCPoint(0, 0) );
         item1.setPosition( new CCPoint( s.width/2 - 100,30) );
@@ -195,13 +195,9 @@ var NS_AT = {
 var ActionsTestScene = TestScene.extend({
     runThisTest: function() {
         NS_AT.nActionIdx = -1;
-        debug.log("runThisTest.");
         var s = this.getScene();
-        debug.log("scene: "+s);
         s.addChild(NS_AT.nextAction());
-        debug.log("scene2: ");
         CCDirector.replaceScene(s);
-        debug.log("scene3: ");
     }
 });
 

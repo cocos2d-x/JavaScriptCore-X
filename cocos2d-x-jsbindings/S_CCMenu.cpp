@@ -18,11 +18,6 @@ JSClassRef js_S_CCMenu_class;
 SCRIPTABLE_BOILERPLATE_IMP(S_CCMenu)
 SCRIPTABLE_BOILERPLATE_IMP_CCNODE(S_CCMenu, CCMenu)
 
-JS_STATIC_FUNC_IMP(S_CCMenu, jsMenuWithItems)
-{
-    return jsConstructor(ctx, thisObject, argumentCount, arguments, exception);
-}
-
 /**
  * manually implement onExit and setParent to avoid the confusion for menu
  * onExit
@@ -47,12 +42,7 @@ JS_STATIC_FUNC_IMP(S_CCMenu, jsMenuWithItems)
 
 JSStaticFunction* S_CCMenu::jsStaticFunctions()
 {
-    static JSStaticFunction funcs[] = {
-        {"menuWithItems", S_CCMenu::jsMenuWithItems, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
-        {0, 0, 0}
-    };
-
-    return funcs;
+	return NULL;
 }
 
 bool S_CCMenu::initWithContext(JSContextRef ctx, JSObjectRef obj, size_t argumentCount, const JSValueRef arguments[])

@@ -20,8 +20,6 @@ class S_CCMenu : public CCMenu
 public:
 	SCRIPTABLE_BOILERPLATE
 	SCRIPTABLE_BOILERPLATE_CCNODE
-
-    JS_STATIC_FUNC_DEF(jsMenuWithItems);
 };
 
 class S_CCMenuItem : public CCMenuItem

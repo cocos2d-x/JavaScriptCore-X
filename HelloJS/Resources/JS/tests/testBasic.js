@@ -33,7 +33,7 @@ var TestScene = Class.extend({
 
       menuItem.setPosition(new CCPoint(size.width-50, 25));
 
-      var menu = CCMenu.menuWithItems(menuItem);
+      var menu = new CCMenu(menuItem);
 
       menu.setPosition(new CCPoint(0, 0));
 

@@ -122,7 +122,7 @@ var TILE_SPECS = [
  */
 var Block = function () {
 	// every block is a new batch node
-	this.batchNode = CCSpriteBatchNode.batchNodeWithFile("tiles.png");
+	this.batchNode = new CCSpriteBatchNode("tiles.png");
 	this.batchNode.setAnchorPoint(0, 0);
 	this.matrix = [];
 	this.cols = 0;
@@ -206,7 +206,7 @@ Block.prototype.setMatrix = function (matrix, cols, color) {
 				// this means the number of nodes is always the same
 				var sp = this.batchNode.getChildByTag(count);
 				if (!sp) {
-					sp = CCSprite.spriteWithSpriteFrameName(COLOR_NAMES[this.color]);
+					sp = new CCSprite(COLOR_NAMES[this.color], 1);
 					this.batchNode.addChild(sp);
 					sp.setTag(count);
 					sp.setAnchorPoint(new CCPoint(0, 0));

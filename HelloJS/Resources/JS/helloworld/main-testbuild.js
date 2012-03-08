@@ -1,5 +1,4 @@
 try {
-    debug.log("onEnter jsc.");
 	var scene = new CCScene();
 
 	var curTime = Date.now();

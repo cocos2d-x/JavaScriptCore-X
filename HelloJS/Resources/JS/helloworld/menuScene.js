@@ -5,9 +5,7 @@ var MainMenu = {};
 MainMenu.start = function () {
 	var menuScene = new CCScene();
 
-
-
-	//var menu = new CCMenu();
+	var menu = new CCMenu();
 
 	var label1 = new CCLabelTTF("Play","Chalkboard SE", 18.0);
 	var label2 = new CCLabelTTF("Options","Chalkboard SE", 18.0);
@@ -22,10 +20,7 @@ MainMenu.start = function () {
 	item1.setPosition(new CCPoint(160, 300));
 	item2.setPosition(new CCPoint(160, 150));
 
-    //staticMenu.addChild(item1);
-	//menu.addChildren(item1, item2);
-    var menu = CCMenu.menuWithItems(item1, item2);
-
+	menu.addChildren(item1, item2);
 	menu.setPosition(new CCPoint(0, 0));
 	menuScene.addChild(menu);
 

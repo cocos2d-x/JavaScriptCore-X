@@ -1,4 +1,4 @@
-﻿require ('JS/tests/resource.js');
+﻿require ('JS/tests/testResource.js');
 require ('JS/tests/ActionsTest.js');
 
 var MainMenu = {
@@ -72,7 +72,8 @@ MainMenu.start = function () {
         CCDirector.end();
     });
 
-    var menu = CCMenu.menuWithItems(closeItem);
+    var menu = new CCMenu();
+    menu.addChild(closeItem);
     menu.setPosition( new CCPoint(0, 0) );
     closeItem.setPosition(new CCPoint( size.width - 30, size.height - 30));
     // add menu items for tests

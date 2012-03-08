@@ -4,7 +4,7 @@ try {
 	var curTime = Date.now();
 	for (var i=0; i < 10; i++)
 	{
-		var sprite = CCSprite.spriteWithFile("mapletree.png");
+		var sprite = new CCSprite("mapletree.png");
 		sprite.setPosition(30 + i*40, 70);
 		if (i % 3 === 0) {
 			sprite.setOpacity(128);
@@ -18,7 +18,7 @@ try {
 	var endTime = Date.now();
 	debug.log("js delta\t" + (endTime - curTime) / 1000.0);
 
-	var sprite = CCSprite.spriteWithFile("mapletree.png");
+	var sprite = new CCSprite("mapletree.png");
 	sprite.setPosition(160, 320);
 	sprite.registerAsTouchHandler();
 	sprite.touchesBegan = function (points) {
