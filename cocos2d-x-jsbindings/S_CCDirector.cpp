@@ -7,6 +7,7 @@
 //
 
 #include "S_CCDirector.h"
+#include "S_Classes.h"
 
 JSClassRef js_S_CCDirector_class;
 
@@ -28,10 +29,12 @@ JSValueRef S_CCDirector::jsGetProperty(JSContextRef ctx, JSObjectRef object, JSS
 JSStaticFunction* S_CCDirector::jsStaticFunctions()
 {
 	static JSStaticFunction funcs[] = {
+        {"getWinSize", S_CCDirector::jsGetWinSize, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
 		{"runWithScene", S_CCDirector::jsRunWithScene, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
 		{"replaceScene", S_CCDirector::jsReplaceScene, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
 		{"pushScene", S_CCDirector::jsPushScene, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
 		{"popScene", S_CCDirector::jsPopScene, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
+        {"end", S_CCDirector::jsEnd, kJSPropertyAttributeReadOnly | kJSPropertyAttributeDontDelete},
 		{0, 0, 0}
 	};
 	return funcs;
@@ -41,6 +44,15 @@ bool S_CCDirector::initWithContext(JSContextRef ctx, JSObjectRef obj, size_t arg
 {
 	return false;
 }
+
+JS_STATIC_FUNC_IMP(S_CCDirector, jsGetWinSize)
+{
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
+    CCSize *size = new CCSize();
+    *size = s;
+    return JSObjectMake(ctx, __jsCCSize_class, size);
+}
+
 
 JS_STATIC_FUNC_IMP(S_CCDirector, jsRunWithScene)
 {
@@ -105,4 +117,10 @@ JS_STATIC_FUNC_IMP(S_CCDirector, jsPopScene)
 		}
 	}
 	return JSValueMakeUndefined(ctx);
+}
+
+JS_STATIC_FUNC_IMP(S_CCDirector, jsEnd)
+{
+    CCDirector::sharedDirector()->end();
+    return JSValueMakeUndefined(ctx);
 }

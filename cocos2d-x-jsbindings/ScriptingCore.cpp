@@ -64,6 +64,7 @@ void sc_genericCppFinalize(JSObjectRef object)
 
 JSClassRef		__jsCCPoint_class;
 JSClassRef		__jsCCColor_class;
+JSClassRef      __jsCCSize_class;
 
 JSObjectRef		jsCCPointConstructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception);
 void			jsCCPointFinalize(JSObjectRef object);
@@ -76,6 +77,12 @@ void			jsCCColorFinalize(JSObjectRef object);
 bool			jsCCColorHasProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName);
 JSValueRef		jsCCColorGetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyNameJS, JSValueRef* exception);
 bool			jsCCColorSetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception);
+
+JSObjectRef		jsCCSizeConstructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception);
+void			jsCCSizeFinalize(JSObjectRef object);
+bool			jsCCSizeHasProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName);
+JSValueRef		jsCCSizeGetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyNameJS, JSValueRef* exception);
+bool			jsCCSizeSetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception);
 
 JSObjectRef jsCCPointConstructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
 {
@@ -199,6 +206,62 @@ bool jsCCColorSetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef prop
 	return false;
 }
 
+JSObjectRef jsCCSizeConstructor(JSContextRef ctx, JSObjectRef constructor, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception)
+{
+    CCSize *size = new CCSize();
+    if (argumentCount == 2) {
+        size->width = JSValueToNumber(ctx, arguments[0], NULL);
+        size->height = JSValueToNumber(ctx, arguments[1], NULL);
+    }
+    return JSObjectMake(ctx, __jsCCSize_class, size);
+}
+
+void jsCCSizeFinalize(JSObjectRef object)
+{
+    CCSize *size = (CCSize *)JSObjectGetPrivate(object);
+    if (size) {
+        delete size;
+    }
+}
+
+bool jsCCSizeHasProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName)
+{
+    char buff[50] = {0};
+    JSStringGetUTF8CString(propertyName, buff, sizeof(buff));
+    if (0 == strcmp(buff, "width") || 0 == strcmp(buff, "height")) {
+        return true;
+    }
+    return false;
+}
+
+JSValueRef jsCCSizeGetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyNameJS, JSValueRef* exception)
+{
+    char buff[50] = {0};
+    JSStringGetUTF8CString(propertyNameJS, buff, sizeof(buff));
+    CCSize *size = (CCSize *)JSObjectGetPrivate(object);
+    if (size && 0 == strcmp(buff, "width")) {
+        return JSValueMakeNumber(ctx, size->width);
+    } else if (size && 0 == strcmp(buff, "height")) {
+        return JSValueMakeNumber(ctx, size->height);
+    }
+    return JSValueMakeUndefined(ctx);
+}
+
+bool jsCCSizeSetProperty(JSContextRef ctx, JSObjectRef object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception)
+{
+    char buff[50] = {0};
+    JSStringGetUTF8CString(propertyName, buff, sizeof(buff));
+    CCSize *size = (CCSize *)JSObjectGetPrivate(object);
+    if (size && 0 == strcmp(buff, "width")) {
+        size->width = JSValueToNumber(ctx, value, NULL);
+        return true;
+    } else if (size && 0 == strcmp(buff, "height")) {
+        size->height = JSValueToNumber(ctx, value, NULL);
+        return true;
+    }
+    return false;
+}
+
 #pragma mark - S_TouchDelegate
 
 void __executeJSCallbackForTouchEvent(const char *event, JSObjectRef thisObject, CCSet *pTouches)
@@ -316,6 +379,7 @@ ScriptingCore::ScriptingCore()
 	js_S_CCMenuItem_class = registerClass<S_CCMenuItem>("CCMenuItem", js_S_CCNode_class);
 	js_S_CCMenuItemLabel_class = registerClass<S_CCMenuItemLabel>("CCMenuItemLabel", js_S_CCMenuItem_class);
 	js_S_CCMenuItemSprite_class = registerClass<S_CCMenuItemSprite>("CCMenuItemSprite", js_S_CCMenuItem_class);
+    js_S_CCMenuItemImage_class = registerClass<S_CCMenuItemImage>("CCMenuItemImage", js_S_CCMenuItem_class);
 	js_S_CCLabelTTF_class = registerClass<S_CCLabelTTF>("CCLabelTTF", js_S_CCSprite_class);
 	js_S_CCParticleSystem_class = registerClass<S_CCParticleSystem>("CCParticleSystem", js_S_CCNode_class);
 	js_S_CCAnimation_class = registerClass<S_CCAnimation>("CCAnimation", NULL);
@@ -457,14 +521,14 @@ ScriptingCore::ScriptingCore()
 	JSStringRelease(tmp);
 	
 	JSClassDefinition jsColorClassDef = kJSClassDefinitionEmpty;
-	jsPointClassDef.version = 0;
-	jsPointClassDef.attributes = kJSClassAttributeNone;
-	jsPointClassDef.className = "CCColor";
-	jsPointClassDef.callAsConstructor = jsCCColorConstructor;
-	jsPointClassDef.finalize = jsCCColorFinalize;
-	jsPointClassDef.hasProperty = jsCCColorHasProperty;
-	jsPointClassDef.getProperty = jsCCColorGetProperty;
-	jsPointClassDef.setProperty = jsCCColorSetProperty;
+	jsColorClassDef.version = 0;
+	jsColorClassDef.attributes = kJSClassAttributeNone;
+	jsColorClassDef.className = "CCColor";
+	jsColorClassDef.callAsConstructor = jsCCColorConstructor;
+	jsColorClassDef.finalize = jsCCColorFinalize;
+	jsColorClassDef.hasProperty = jsCCColorHasProperty;
+	jsColorClassDef.getProperty = jsCCColorGetProperty;
+	jsColorClassDef.setProperty = jsCCColorSetProperty;
 
 	tmp = JSStringCreateWithUTF8CString("CCColor");
 	__jsCCColor_class = JSClassCreate(&jsColorClassDef);
@@ -472,6 +536,22 @@ ScriptingCore::ScriptingCore()
 	JSObjectSetProperty(m_globalContext, m_globalObject, tmp, clObj, kJSPropertyAttributeNone, NULL);
 	JSStringRelease(tmp);
 	
+
+    JSClassDefinition jsSizeClassDef = kJSClassDefinitionEmpty;
+    jsSizeClassDef.version = 0;
+    jsSizeClassDef.attributes = kJSClassAttributeNone;
+    jsSizeClassDef.className = "CCSize";
+    jsSizeClassDef.callAsConstructor = jsCCSizeConstructor;
+    jsSizeClassDef.finalize = jsCCSizeFinalize;
+    jsSizeClassDef.hasProperty = jsCCSizeHasProperty;
+    jsSizeClassDef.getProperty = jsCCSizeGetProperty;
+    jsSizeClassDef.setProperty = jsCCSizeSetProperty;
+
+    tmp = JSStringCreateWithUTF8CString("CCSize");
+    __jsCCSize_class = JSClassCreate(&jsSizeClassDef);
+    JSObjectRef sizeObj = JSObjectMake(m_globalContext, __jsCCSize_class, NULL);
+    JSObjectSetProperty(m_globalContext, m_globalObject, tmp, sizeObj, kJSPropertyAttributeNone, NULL);
+    JSStringRelease(tmp);
 	// init debugger
 //	m_debugController = new JSCDebuggerController(m_globalContext, this);
 }

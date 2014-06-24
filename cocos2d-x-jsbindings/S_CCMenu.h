@@ -20,8 +20,6 @@ class S_CCMenu : public CCMenu
 public:
 	SCRIPTABLE_BOILERPLATE
 	SCRIPTABLE_BOILERPLATE_CCNODE
-
-    JS_STATIC_FUNC_DEF(jsMenuWithItems);
 };
 
 class S_CCMenuItem : public CCMenuItem
@@ -61,6 +59,18 @@ public:
 	SCRIPTABLE_BOILERPLATE_CCNODE
 	
 	virtual void menuHandler(CCObject* pSender);
+};
+
+class S_CCMenuItemImage : public CCMenuItemImage
+{
+    JSObjectRef m_Callback;
+public:
+    S_CCMenuItemImage() : CCMenuItemImage(), m_Callback(NULL) {};
+
+    SCRIPTABLE_BOILERPLATE
+    SCRIPTABLE_BOILERPLATE_CCNODE
+
+    virtual void menuHandler(CCObject* pSender);
 };
 
 #endif

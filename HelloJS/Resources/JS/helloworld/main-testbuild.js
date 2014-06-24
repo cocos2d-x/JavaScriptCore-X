@@ -4,7 +4,7 @@ try {
 	var curTime = Date.now();
 	for (var i=0; i < 10; i++)
 	{
-		var sprite = CCSprite.spriteWithFile("mapletree.png");
+		var sprite = new CCSprite("mapletree.png");
 		sprite.setPosition(30 + i*40, 70);
 		if (i % 3 === 0) {
 			sprite.setOpacity(128);
@@ -18,7 +18,7 @@ try {
 	var endTime = Date.now();
 	debug.log("js delta\t" + (endTime - curTime) / 1000.0);
 
-	var sprite = CCSprite.spriteWithFile("mapletree.png");
+	var sprite = new CCSprite("mapletree.png");
 	sprite.setPosition(160, 320);
 	sprite.registerAsTouchHandler();
 	sprite.touchesBegan = function (points) {
@@ -35,11 +35,14 @@ try {
 	};
 	scene.addChild(sprite);
 
-	var label = new CCLabelTTF("Testing labels", "Chalkboard SE", 12.0);
-	label.setPosition(160, 300);
-	scene.addChild(label);
-
-	label.setString("Really testing labels");
+	var sumTime = 0.0;
+	scene.schedule("update", function (delta) {
+		sumTime += delta;
+		if (sumTime > 2.0) {
+			exit(0);
+		}
+		debug.log(sumTime);
+	});
 } catch (e) {
 	debug.log("error: " + e);
 }

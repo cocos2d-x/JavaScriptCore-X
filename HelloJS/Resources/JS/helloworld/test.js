@@ -1,5 +1,4 @@
 try {
-    debug.log("onEnter jsc.");
 	var scene = new CCScene();
 
 	var curTime = Date.now();
@@ -36,14 +35,11 @@ try {
 	};
 	scene.addChild(sprite);
 
-	var sumTime = 0.0;
-	scene.schedule("update", function (delta) {
-		sumTime += delta;
-		if (sumTime > 2.0) {
-			exit(0);
-		}
-		debug.log(sumTime);
-	});
+	var label = new CCLabelTTF("Testing labels", "Chalkboard SE", 12.0);
+	label.setPosition(160, 300);
+	scene.addChild(label);
+
+	label.setString("Really testing labels");
 } catch (e) {
 	debug.log("error: " + e);
 }

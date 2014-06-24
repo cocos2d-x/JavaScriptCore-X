@@ -13,6 +13,7 @@
 
 extern JSClassRef __jsCCPoint_class;
 extern JSClassRef __jsCCColor_class;
+extern JSClassRef __jsCCSize_class;
 
 extern JSClassRef js_S_CCDirector_class;
 extern JSClassRef js_S_CCScheduler_class;
@@ -25,6 +26,7 @@ extern JSClassRef js_S_CCMenu_class;
 extern JSClassRef js_S_CCMenuItem_class;
 extern JSClassRef js_S_CCMenuItemLabel_class;
 extern JSClassRef js_S_CCMenuItemSprite_class;
+extern JSClassRef js_S_CCMenuItemImage_class;
 extern JSClassRef js_S_CCLabelTTF_class;
 extern JSClassRef js_S_CCParticleSystem_class;
 extern JSClassRef js_S_CCSpriteFrame_class;

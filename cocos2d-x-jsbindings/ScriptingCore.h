@@ -124,7 +124,7 @@ void klass::callJsFunction(char* pszFunName) \
         if (JSObjectHasProperty(ctx, thisObject, jsName)) \
         { \
             JSObjectRef cb = JSValueToObject(ctx, JSObjectGetProperty(ctx, thisObject, jsName, NULL), NULL); \
-            JSObjectCallAsFunction(ctx, cb, NULL, 0, NULL, NULL); \
+            JSObjectCallAsFunction(ctx, cb, thisObject, 0, NULL, NULL); \
         } \
         JSStringRelease(jsName); \
     } \

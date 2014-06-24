@@ -121,7 +121,7 @@ Game.copyToMatrix = function (block) {
 				var pos = new CCPoint(block.position.x + i, block.position.y + (cols - j) - 1);
 				// debug.log("creating block for matrix in " + pos.x + "," + pos.y);
 				this.matrix[pos.y * Game.COLS + pos.x] = 1;
-				var sprite = CCSprite.spriteWithSpriteFrameName(COLOR_NAMES[block.color]);
+				var sprite = new CCSprite(COLOR_NAMES[block.color], 1);
 				sprite.setTag(hashFromCoord(pos));
 				sprite.setAnchorPoint(new CCPoint(0, 0));
 				sprite.setPosition(new CCPoint(pos.x * Game.TILE_SIZE, pos.y * Game.TILE_SIZE));
@@ -239,7 +239,7 @@ Game.start = function () {
 	CCSpriteFrameCache.addSpriteFramesWithFile("tiles.plist");
 	
 	Game.matrix = new Array(Game.COLS * Game.ROWS);
-	Game.batchNode = CCSpriteBatchNode.batchNodeWithFile("tiles.png");
+	Game.batchNode = new CCSpriteBatchNode("tiles.png");
 	Game.batchNode.setPosition(new CCPoint(0, 0));
 	Game.batchNode.setAnchorPoint(new CCPoint(0, 0));
 
@@ -247,7 +247,7 @@ Game.start = function () {
 	var scene = new CCScene();
 	scene.setPosition(new CCPoint(4, 0));
 
-	var background = CCSprite.spriteWithFile("background.png");
+	var background = new CCSprite("background.png");
 	background.setPosition(new CCPoint(-4, 0));
 	scene.addChild(background);
 
